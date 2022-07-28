@@ -52,7 +52,7 @@ type SroCfg struct {
 	// +kubebuilder:validation:Optional
 	Namespace string `json:"namespace,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/ice-driver-src:1.8.3"
+	// +kubebuilder:default:string="quay.io/silicom/ice-driver-src:1.8.3.2"
 	// +kubebuilder:validation:Optional
 	SrcImage string `json:"srcImage,omitempty"`
 
@@ -67,15 +67,15 @@ type SroCfg struct {
 
 type StsImages struct {
 
-	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.1.1"
+	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.5"
 	// +kubebuilder:validation:Optional
 	Tsyncd string `json:"tsyncd"`
 
-	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.1.1"
+	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.5"
 	// +kubebuilder:validation:Optional
 	GrpcTsyncd string `json:"grpcTsyncd"`
 
-	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.0.6"
+	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.0.8"
 	// +kubebuilder:validation:Optional
 	StsPlugin string `json:"stsPlugin"`
 

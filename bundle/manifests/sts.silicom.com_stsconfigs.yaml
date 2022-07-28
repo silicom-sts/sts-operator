@@ -61,9 +61,17 @@ spec:
                 minimum: 1
                 type: integer
               forwardable:
-                default: 0
+                default: 1
                 description: "Forwardable/Non-Forwardable Multicast Address \n 0 -
-                  Non-Forwardable (default) \n 1 - Forwardable"
+                  Non-Forwardable \n 1 - Forwardable (default)"
+                maximum: 1
+                minimum: 0
+                type: integer
+              freerunSQ:
+                default: 0
+                description: "Configures the Squelch Mode \n 0 - Sending Sync packet
+                  in GM and BC modes while in Freerun (default) \n 1 - Not sending
+                  Sync packet in GM and BC modes while in Freerun"
                 maximum: 1
                 minimum: 0
                 type: integer
@@ -83,9 +91,9 @@ spec:
                     minimum: -50000000
                     type: integer
                   gnssClockOutEn:
-                    default: 1
+                    default: 0
                     description: "Enable/disable the Clock Out Valid range 0-1 \n
-                      \    0 - Disable \n     1 - Enable (default)"
+                      \    0 - Disable  (default) \n     1 - Enable"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -358,16 +366,16 @@ spec:
                       \    120 - (default)"
                     type: integer
                   gnssTP1En:
-                    default: 1
+                    default: 0
                     description: "Enable/disable the first Time Pulse Valid range
-                      0-1 \n     0 - Disable \n     1 - Enable (default)"
+                      0-1 \n     0 - Disable  (default) \n     1 - Enable"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssTP2En:
-                    default: 1
+                    default: 0
                     description: "Enable/disable the second Time Pulse (10 MHz) Valid
-                      range 0-1 \n     0 - Disable \n     1 - Enable (default)"
+                      range 0-1 \n     0 - Disable  (default) \n     1 - Enable (default)"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -412,12 +420,24 @@ spec:
                       maximum: 1
                       minimum: 0
                       type: integer
+                    localPortPriority:
+                      default: 128
+                      description: Set Port Local Priorities for BC/TSC PTP profiles
+                        Valid range 1-255, smaller values indicate higher priority
+                      maximum: 255
+                      minimum: 1
+                      type: integer
                     mode:
                       default: Master
                       enum:
                       - Master
                       - Slave
                       type: string
+                    portSpeed:
+                      default: 10000
+                      maximum: 25000
+                      minimum: 10000
+                      type: integer
                     ql:
                       default: 4
                       description: "Configures QL value for the interface \n if syncOption
@@ -445,6 +465,13 @@ spec:
                   - ethName
                   type: object
                 type: array
+              localClockPriority:
+                default: 128
+                description: Set Clock Local Priority for BC/TSC PTP profiles Valid
+                  range 1-255, smaller values indicate higher priority
+                maximum: 255
+                minimum: 1
+                type: integer
               mode:
                 default: T-GM.8275.1
                 description: "Telecom G8275 Profile \n T-BC-8275.1 (default) \n T-GM.8275.1
@@ -513,6 +540,13 @@ spec:
                 maximum: 2
                 minimum: 1
                 type: integer
+              stsCpu:
+                default: 0
+                description: Set CPU Pin for SyncE ESMC thread (cpu affinity on each
+                  node)
+                maximum: 10
+                minimum: 0
+                type: integer
               syncOption:
                 default: 1
                 description: "Configures the synchronization network \n 1 - Option
@@ -520,12 +554,6 @@ spec:
                   Option 2 refers to synchronization networks designed for United
                   States"
                 maximum: 2
-                minimum: 1
-                type: integer
-              synceCpu:
-                default: 10
-                description: Set CPU Pin for SyncE ESMC thread
-                maximum: 40
                 minimum: 1
                 type: integer
               synceHoldOff:
@@ -584,8 +612,22 @@ spec:
                 maximum: 1
                 minimum: 0
                 type: integer
+              unicastMaster:
+                default: 0,192.168.1.1,,,
+                description: 'Unicast master table for G.8275.2 Boundary Clock profile
+                  series specifies unicast masters for its slave ports. There can
+                  be multiple entries per port. Each entry must be in the following
+                  format:  <port_number>,<master_ip_address>,[<log_announce_interval>],[<log_sync_interval>],[<log_delayreq_interval>]
+                  Note:  <port_number> is zero-based, so 0 corresponds to port1 above.  For
+                  UDP/IPv6 ports <master_ip_address> shall specify IPv6 address.  Omitting
+                  any of the intervals will make that interval take on the default
+                  for the profile. Example:  ipv6PortMask = 0x002  unicastMaster =
+                  0,192.168.1.100  unicastMaster = 0,192.168.1.101,,0,0  unicastMaster
+                  = 1,fe80::211:22ff:fe33:4455,0,-1,-1'
+                type: string
             required:
             - interfaces
+            - unicastMaster
             type: object
           status:
             description: StsConfigStatus defines the observed state of StsConfig

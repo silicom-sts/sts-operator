@@ -9,7 +9,7 @@ OPERATOR_VER := $(shell git branch --show-current)
 
 EXTRA_SERVICE_ACCOUNTS := --extra-service-accounts="sts-plugin,sts-tsync"
 
-TSYNC_VERSION := 2.1.1.1
+TSYNC_VERSION := 2.1.2.5
 ICE_VERSION = 1.8.8
 
 MARKETPLACE_REMOTE_WORKFLOW  := https://marketplace.redhat.com/en-us/operators/silicom-sts-operator/pricing?utm_source=openshift_console
@@ -34,7 +34,7 @@ export PFLT_DOCKERCONFIG=$(shell pwd)/docker.json
 # To re-generate a bundle for other specific channels without changing the standard setup, you can:
 # - use the CHANNELS as arg of the bundle target (e.g make bundle CHANNELS=candidate,fast,stable)
 # - use environment variables to overwrite this value (e.g export CHANNELS="candidate,fast,stable")
-CHANNELS?="alpha"
+CHANNELS?="alpha,stable"
 ifneq ($(origin CHANNELS), undefined)
 BUNDLE_CHANNELS := --channels=$(CHANNELS)
 endif
@@ -44,7 +44,7 @@ endif
 # To re-generate a bundle for any other default channel without changing the default setup, you can:
 # - use the DEFAULT_CHANNEL as arg of the bundle target (e.g make bundle DEFAULT_CHANNEL=stable)
 # - use environment variables to overwrite this value (e.g export DEFAULT_CHANNEL="stable")
-DEFAULT_CHANNEL?="alpha"
+DEFAULT_CHANNEL?="stable"
 ifneq ($(origin DEFAULT_CHANNEL), undefined)
 BUNDLE_DEFAULT_CHANNEL := --default-channel=$(DEFAULT_CHANNEL)
 endif

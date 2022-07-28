@@ -324,11 +324,11 @@ type StsGnssSpec struct {
 	// Enable/disable the first Time Pulse
 	// Valid range 0-1
 	//
-	//     0 - Disable
+	//     0 - Disable  (default)
 	//
-	//     1 - Enable (default)
+	//     1 - Enable
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Optional
@@ -400,11 +400,11 @@ type StsGnssSpec struct {
 	// Enable/disable the second Time Pulse (10 MHz)
 	// Valid range 0-1
 	//
-	//     0 - Disable
+	//     0 - Disable  (default)
 	//
 	//     1 - Enable (default)
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Optional
@@ -642,11 +642,11 @@ type StsGnssSpec struct {
 	// Enable/disable the Clock Out
 	// Valid range 0-1
 	//
-	//     0 - Disable
+	//     0 - Disable  (default)
 	//
-	//     1 - Enable (default)
+	//     1 - Enable
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Optional
@@ -754,12 +754,12 @@ type StsConfigSpec struct {
 	//2 - Option 2 refers to synchronization networks designed for United States
 	SyncOption int `json:"syncOption,omitempty"`
 
-	// +kubebuilder:default:=10
-	// +kubebuilder:validation:Minimum=1
-	// +kubebuilder:validation:Maximum=40
+	// +kubebuilder:default:=0
+	// +kubebuilder:validation:Minimum=0
+	// +kubebuilder:validation:Maximum=10
 	// +kubebuilder:validation:Optional
-	// Set CPU Pin for SyncE ESMC thread
-	SynceCpu int `json:"synceCpu,omitempty"`
+	// Set CPU Pin for SyncE ESMC thread (cpu affinity on each node)
+	StsCpu int `json:"stsCpu,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
@@ -772,6 +772,17 @@ type StsConfigSpec struct {
 	//1 - Enable two-step clock
 	TwoStep int `json:"twoStep,omitempty"`
 
+	// +kubebuilder:default:=0
+	// +kubebuilder:validation:Minimum=0
+	// +kubebuilder:validation:Maximum=1
+	// +kubebuilder:validation:Optional
+	//Configures the Squelch Mode
+	//
+	//0 - Sending Sync packet in GM and BC modes while in Freerun (default)
+	//
+	//1 - Not sending Sync packet in GM and BC modes while in Freerun
+	FreerunSQ int `json:"freerunSQ,omitempty"`
+
 	// +kubebuilder:default:=128
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=255
@@ -781,15 +792,15 @@ type StsConfigSpec struct {
 	// Valid range 0-255, smaller values indicate higher priority
 	Priority2 int `json:"priority2,omitempty"`
 
-	// +kubebuilder:default:=0
+	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Optional
 	//Forwardable/Non-Forwardable Multicast Address
 	//
-	//0 - Non-Forwardable (default)
+	//0 - Non-Forwardable
 	//
-	//1 - Forwardable
+	//1 - Forwardable (default)
 	Forwardable int `json:"forwardable,omitempty"`
 
 	// +kubebuilder:default:=-1
@@ -965,6 +976,31 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Maximum=23
 	// +kubebuilder:validation:Optional
 	DomainNum_8265_2 int `json:"domainNum_8265_2"`
+
+	// +kubebuilder:default:=128
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=255
+	// +kubebuilder:validation:Optional
+	//Set Clock Local Priority for BC/TSC PTP profiles
+	//Valid range 1-255, smaller values indicate higher priority
+	LocalClockPriority int `json:"localClockPriority"`
+
+	// +kubebuilder:default:="0,192.168.1.1,,,"
+	// Unicast master table
+	// for G.8275.2 Boundary Clock profile series specifies unicast masters
+	// for its slave ports. There can be multiple entries per port.
+	// Each entry must be in the following format:
+	//  <port_number>,<master_ip_address>,[<log_announce_interval>],[<log_sync_interval>],[<log_delayreq_interval>]
+	// Note:
+	//  <port_number> is zero-based, so 0 corresponds to port1 above.
+	//  For UDP/IPv6 ports <master_ip_address> shall specify IPv6 address.
+	//  Omitting any of the intervals will make that interval take on the default for the profile.
+	// Example:
+	//  ipv6PortMask = 0x002
+	//  unicastMaster = 0,192.168.1.100
+	//  unicastMaster = 0,192.168.1.101,,0,0
+	//  unicastMaster = 1,fe80::211:22ff:fe33:4455,0,-1,-1
+	UnicastMaster string `json:"unicastMaster"`
 }
 
 type StsInterfaceSpec struct {
@@ -1043,6 +1079,24 @@ type StsInterfaceSpec struct {
 	//
 	//7 - QL-DUS (default)
 	Ql int `json:"ql,omitempty"`
+
+	// +kubebuilder:default:=10000
+	// +kubebuilder:validation:Minimum=10000
+	// +kubebuilder:validation:Maximum=25000
+	// +kubebuilder:validation:Optional
+	//
+	//
+	PortSpeed int `json:"portSpeed,omitempty"`
+
+	// +kubebuilder:default:=128
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=255
+	// +kubebuilder:validation:Optional
+	//
+	//Set Port Local Priorities for BC/TSC PTP profiles
+	//Valid range 1-255, smaller values indicate higher priority
+	//
+	LocalPortPriority int `json:"localPortPriority,omitempty"`
 }
 
 // StsConfigStatus defines the observed state of StsConfig

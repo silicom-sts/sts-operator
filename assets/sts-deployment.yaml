@@ -10,6 +10,7 @@ data:
 {{- range $i, $dev := .StsConfig.Spec.Interfaces }}
     port{{$dev.EthPort}} = {{$dev.EthName}}
     ql{{$dev.EthPort}} = {{$dev.Ql}}
+    portSpeed{{$dev.EthPort}} = {{$dev.PortSpeed}}
 {{end}}
 
     synceHoldOff = {{.StsConfig.Spec.SynceHoldOff}}
@@ -45,8 +46,8 @@ data:
     mode10MHz = {{.StsConfig.Spec.Mode10MHz}}
     synceRecClkPort = {{.StsConfig.Spec.SynceRecClkPort}}
     syncOption = {{.StsConfig.Spec.SyncOption}}
-    synceCpu = {{.StsConfig.Spec.SynceCpu}}
-
+    stsCpu = 1
+    localClockPriority = {{.StsConfig.Spec.LocalClockPriority}}
 {{- if or (eq .ProfileId 5) (eq .ProfileId 6) (eq .ProfileId 7) (eq .ProfileId 8) (eq .ProfileId 9) }}
     ipv6PortMask = {{printf "0x%x" .Ipv6PortMask}}
 {{end}}
@@ -111,29 +112,17 @@ data:
     gnssLockMode = {{.StsConfig.Spec.GnssSpec.GnssLockMode}}
     gnssLockTh = {{.StsConfig.Spec.GnssSpec.GnssLockTh}}
     gnssClockOutEn = {{.StsConfig.Spec.GnssSpec.GnssClockOutEn}}
-
-
----
-
-{{- if .EnableGPS }}
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{.ServicePrefix}}-gpsd
-  namespace: {{.StsConfig.Spec.Namespace}}
-  labels:
-    sts.silicom.com/svc: gpsd
-spec:
-  type: ClusterIP
-  selector:
-    app: {{.StsConfig.Name}}-{{.NodeName}}-gpsd
-  ports:
-    - protocol: TCP
-      port: 2947
-      targetPort: 2947
+  tsyncd_grpc.json: |
+    {
+        "Tsynctl":        ": 50051",
+        "TsyncEvents":    ": 50052",
+        "TsyncConfig":    ": 50053",
+        "TsyncStatus":    ": 50054",
+        "TimingMgr":      ": 50055",
+        "LogLevel":       "info"
+    }
 
 ---
-{{end}}
 
 apiVersion: v1
 kind: Service
@@ -147,6 +136,10 @@ spec:
   selector:
     app: {{.StsConfig.Name}}-{{.NodeName}}-tsync
   ports:
+    - protocol: TCP
+      port: 2947
+      targetPort: 2947
+      name: gps
     - protocol: TCP
       port: 50051
       targetPort: 50051
@@ -163,6 +156,10 @@ spec:
       port: 50054
       targetPort: 50054
       name: sta
+    - protocol: TCP
+      port: 50055
+      targetPort: 50055
+      name: man
 
 ---
 
@@ -200,13 +197,9 @@ spec:
       - image: {{.StsOperatorConfig.Spec.Images.GrpcTsyncd}}
         imagePullPolicy: Always
         name: {{.NodeName}}-grpc-tsyncd
-        securityContext:
-          privileged: true
-          readOnlyRootFilesystem: false
-          capabilities:
-            add:
-            - CAP_SYS_ADMIN
         ports:
+        - containerPort: 50055
+          name: {{.ServicePrefix}}-man
         - containerPort: 50054
           name: {{.ServicePrefix}}-stat
         - containerPort: 50053
@@ -215,6 +208,13 @@ spec:
           name: {{.ServicePrefix}}-evt
         - containerPort: 50051
           name: {{.ServicePrefix}}-svc
+        volumeMounts:
+          - name: devfs
+            mountPath: /dev
+        securityContext:
+          capabilities:
+            add:
+            - CAP_SYS_RESOURCES
       - image: {{.StsOperatorConfig.Spec.Images.Tsyncd}}
         imagePullPolicy: Always
         name: {{.NodeName}}-tsync
@@ -227,8 +227,6 @@ spec:
 {{- end}}
           - name: GPS_SVC_PORT
             value: "2947"
-        args:
-        - --zap-log-level=10
         volumeMounts:
           - name: devfs
             mountPath: /dev
@@ -239,112 +237,9 @@ spec:
             mountPath:  /var/log
         securityContext:
           privileged: true
-      volumes:
-        - name: tmpfs
-          emptyDir: {}
-        - name: devfs
-          hostPath:
-            path: /dev
-        - name: {{.StsConfig.Name}}-tsync-conf
-          configMap:
-            defaultMode: 0777
-            name: {{.StsConfig.Name}}-tsync-conf
-
----
-
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  labels:
-    app: {{.StsConfig.Name}}-{{.NodeName}}-phc2sys
-  name: {{.StsConfig.Name}}-{{.NodeName}}-phc2sys
-  namespace: {{.StsConfig.Spec.Namespace}}
-  annotations:
-    openshift.io/scc: {{.StsConfig.Name}}
-spec:
-  selector:
-    matchLabels:
-      app: {{.StsConfig.Name}}-{{.NodeName}}-phc2sys
-  template:
-    metadata:
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ""
-      labels:
-        app: {{.StsConfig.Name}}-{{.NodeName}}-phc2sys
-    spec:
-      shareProcessNamespace: true
-      nodeSelector:
-        kubernetes.io/hostname: {{.NodeName}}
-        sts.silicom.com/ice-driver-available: "true"
-{{- range $k, $v := .StsConfig.Spec.NodeSelector }}
-        {{ $k }}: "{{ $v }}"
-{{- end }}
-      serviceAccount: sts-tsync
-      dnsPolicy: ClusterFirstWithHostNet
-      hostNetwork: true
-      containers:
-      - image: {{.StsOperatorConfig.Spec.Images.Phc2sys}}
-        name: {{.NodeName}}-phc2sys
-        imagePullPolicy: Always
-        network_mode: host
-        env:
-          - name: WAIT_FOR_GPS
-{{- if .EnableGPS}}
-            value: "true"
-{{- else}}
-            value: "false"
-{{end}}
-          - name: GPS_SVC_PORT
-            value: "2947"
-        volumeMounts:
-          - name: devfs
-            mountPath: /dev
-        securityContext:
-          privileged: true
-          readOnlyRootFilesystem: false
           capabilities:
             add:
-            - CAP_SYS_TIME
-      volumes:
-        - name: devfs
-          hostPath:
-            path: /dev
-
-{{- if .EnableGPS }}
-
----
-
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  labels:
-    app: {{.StsConfig.Name}}-{{.NodeName}}-gpsd
-  name: {{.StsConfig.Name}}-{{.NodeName}}-gpsd
-  namespace: {{.StsConfig.Spec.Namespace}}
-  annotations:
-    openshift.io/scc: {{.StsConfig.Name}}
-spec:
-  selector:
-    matchLabels:
-      app: {{.StsConfig.Name}}-{{.NodeName}}-gpsd
-  template:
-    metadata:
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ""
-      labels:
-        app: {{.StsConfig.Name}}-{{.NodeName}}-gpsd
-    spec:
-      shareProcessNamespace: true
-      nodeSelector:
-        kubernetes.io/hostname: {{.NodeName}}
-        sts.silicom.com/ice-driver-available: "true"
-{{- range $k, $v := .StsConfig.Spec.NodeSelector }}
-        {{ $k }}: "{{ $v }}"
-{{- end }}
-      serviceAccount: sts-tsync
-      dnsPolicy: ClusterFirstWithHostNet
-      hostNetwork: true
-      containers:
+            - CAP_SYS_ADMIN
       - image: {{.StsOperatorConfig.Spec.Images.TsyncExtts}}
         name: {{.NodeName}}-tsyncextts
         imagePullPolicy: Always
@@ -376,16 +271,42 @@ spec:
         env:
           - name: GPS_SVC_PORT
             value: "2947"
+          - name: STS_Cpu
+            value: "1"
+        volumeMounts:
+          - name: devfs
+            mountPath: /dev
+        securityContext:
+          privileged: true
+      - image: {{.StsOperatorConfig.Spec.Images.Phc2sys}}
+        name: {{.NodeName}}-phc2sys
+        imagePullPolicy: Always
+        network_mode: host
+        env:
+          - name: WAIT_FOR_GPS
+{{- if .EnableGPS}}
+            value: "true"
+{{- else}}
+            value: "false"
+{{end}}
+          - name: GPS_SVC_PORT
+            value: "2947"
         volumeMounts:
           - name: devfs
             mountPath: /dev
         securityContext:
           privileged: true
           readOnlyRootFilesystem: false
-          seLinuxOptions:
-            level: "s0"
+          capabilities:
+            add:
+            - CAP_SYS_TIME
       volumes:
+        - name: tmpfs
+          emptyDir: {}
         - name: devfs
           hostPath:
             path: /dev
-{{end}}
+        - name: {{.StsConfig.Name}}-tsync-conf
+          configMap:
+            defaultMode: 0777
+            name: {{.StsConfig.Name}}-tsync-conf
