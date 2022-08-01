@@ -74,7 +74,7 @@ COMMUNITY_PROD_OPERATORS_DIR := community-operators-prod
 OPERATOR_NAME			:= silicom-sts-operator
 
 CERTIFIED_DIR         := certified-operators
-CERTIFIED_GIT         := https://github.com/silicomDK/certified-operators.git
+CERTIFIED_GIT         := https://github.com/rmr/certified-operators.git
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))

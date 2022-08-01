@@ -619,17 +619,17 @@ spec:
     name: gpsd
   - image: quay.io/silicom/phc2sys@sha256:290fb03158af755984515dc6e45bdb61060019ca6957525533e450a36057bf1e
     name: phc2sys
-  - image: quay.io/silicom/tsyncd@sha256:9527b2d0709f7acbe1c7f3fe1c757d7b400b993c749ad56b7cfd74147c74dc83
+  - image: quay.io/silicom/tsyncd@sha256:3a53038b4aaa79009e71dd84df6f02890926d4b9c82715ec1920a85460519bbf
     name: tsyncd
-  - image: quay.io/silicom/grpc-tsyncd@sha256:d29c4b4dc623061de802517cb38a3559d3c0eec36030be4aa1be0fea6d787289
+  - image: quay.io/silicom/grpc-tsyncd@sha256:fdd5cf87602f65ce2b6d320aef9655068cfca34616c856b505fcbd1ded74fb12
     name: grpc-tsyncd
-  - image: quay.io/silicom/tsync_extts@sha256:f15f230fdc6b4a345a54bdd68003e6ee0bc95bbf01a7688f5b6f7efe2e3e5491
+  - image: quay.io/silicom/tsync_extts@sha256:e02e65a711614082763515df948d5dab65cc56d45481d4dc57c7eca730263070
     name: tsync_extts
-  - image: quay.io/silicom/sts-plugin@sha256:86562c40a07ef8dc198bd53562ae332d89d9ea5d45b8e8aa9d3685bc6f7ee60f
+  - image: quay.io/silicom/sts-plugin@sha256:0e41967c6e4e7ff4bd27bc0502d6627831023867781ef92cde6c4abbd3c57e87
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:a79a5cf99f5238ee08c509efe0b6142197ef0b79a6b209c125d9f7b7235758e5
+  - image: quay.io/silicom/sts-operator@sha256:8982d423ad479a495b38be3a84f749eb4d1591686a5ed5f8fd5e92fa16a9b7ab
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy
