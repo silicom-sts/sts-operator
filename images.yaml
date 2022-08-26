@@ -13,7 +13,7 @@
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:6ebe1695a66cfb21168c35d04cf851214182e8c24236b2f72bc5dd466ba9e3ea
+  - image: quay.io/silicom/sts-operator@sha256:14d37527179a4a1d387e8e2ef5a028cc012dc533b2bcfdc27c72932b90240223
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy
