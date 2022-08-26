@@ -9,7 +9,7 @@ OPERATOR_VER := $(shell git branch --show-current)
 
 EXTRA_SERVICE_ACCOUNTS := --extra-service-accounts="sts-plugin,sts-tsync"
 
-TSYNC_VERSION := 2.1.2.5
+TSYNC_VERSION := 2.1.2.8
 ICE_VERSION = 1.8.8
 
 MARKETPLACE_REMOTE_WORKFLOW  := https://marketplace.redhat.com/en-us/operators/silicom-sts-operator/pricing?utm_source=openshift_console
