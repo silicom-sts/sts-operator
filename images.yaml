@@ -9,11 +9,11 @@
     name: grpc-tsyncd
   - image: quay.io/silicom/tsync_extts@sha256:340aae1afee2a0f8ac0220ac05681d86f4d71934c1374f2d942aff602872a2d7
     name: tsync_extts
-  - image: quay.io/silicom/sts-plugin@sha256:77354b324c6e09b182bca27554a2a96ce8bfe214001417a7db4038110870b406
+  - image: quay.io/silicom/sts-plugin@sha256:371b063061bf66403e1fa7329acbd574a38d443b5c3c7ebcf2a30a0dc1e63282
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:0147da2ac7b6fd6eca2a7b5a286ff59d941d15de6f3ad17e71e3e775d1ea2b92
+  - image: quay.io/silicom/sts-operator@sha256:6ebe1695a66cfb21168c35d04cf851214182e8c24236b2f72bc5dd466ba9e3ea
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy
