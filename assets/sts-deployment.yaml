@@ -214,7 +214,7 @@ spec:
         securityContext:
           capabilities:
             add:
-            - CAP_SYS_RESOURCES
+            - CAP_SYS_ADMIN
       - image: {{.StsOperatorConfig.Spec.Images.Tsyncd}}
         imagePullPolicy: Always
         name: {{.NodeName}}-tsync
