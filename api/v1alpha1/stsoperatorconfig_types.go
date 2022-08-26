@@ -27,19 +27,19 @@ import (
 // StsOperatorConfigSpec defines the desired state of StsOperatorConfig
 type StsOperatorConfigSpec struct {
 
-	// +kubebuilder:object:generate=true
-	// +kubebuilder:validation:Optional
-	Images StsImages `json:"images"`
+	// +kubebuilder:validation:Required
+	// +kubebuilder:default={"tsyncd":"quay.io/silicom/tsyncd:2.1.2.8"}
+	Images StsImages `json:"images,omitempty"`
 
-	// +kubebuilder:object:generate=true
-	// +kubebuilder:validation:Optional
-	Sro SroCfg `json:"sro"`
+	// +kubebuilder:validation:Required
+	// +kubebuilder:default={"build": false}
+	Sro SroCfg `json:"sro,omitempty"`
 }
 
 type SroCfg struct {
-	// +kubebuilder:default:bool=true
+	// +kubebuilder:default:bool=false
 	// +kubebuilder:validation:Optional
-	Build bool `json:"build"`
+	Build bool `json:"build,omitempty"`
 
 	// +kubebuilder:default:string="1.8.3"
 	// +kubebuilder:validation:Optional
@@ -67,29 +67,29 @@ type SroCfg struct {
 
 type StsImages struct {
 
-	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.5"
-	// +kubebuilder:validation:Optional
-	Tsyncd string `json:"tsyncd"`
+	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.8"
+	// +kubebuilder:validation:Required
+	Tsyncd string `json:"tsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.5"
-	// +kubebuilder:validation:Optional
-	GrpcTsyncd string `json:"grpcTsyncd"`
+	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.8"
+	// +kubebuilder:validation:Required
+	GrpcTsyncd string `json:"grpcTsyncd,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.0.8"
-	// +kubebuilder:validation:Optional
-	StsPlugin string `json:"stsPlugin"`
+	// +kubebuilder:validation:Required
+	StsPlugin string `json:"stsPlugin,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/gpsd:3.23.1"
-	// +kubebuilder:validation:Optional
-	Gpsd string `json:"gpsd"`
+	// +kubebuilder:validation:Required
+	Gpsd string `json:"gpsd,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/tsync_extts:1.0.0"
-	// +kubebuilder:validation:Optional
-	TsyncExtts string `json:"tsyncExtts"`
+	// +kubebuilder:validation:Required
+	TsyncExtts string `json:"tsyncExtts,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/phc2sys:3.1.1"
-	// +kubebuilder:validation:Optional
-	Phc2sys string `json:"phc2sys"`
+	// +kubebuilder:validation:Required
+	Phc2sys string `json:"phc2sys,omitempty"`
 }
 
 // StsOperatorConfigStatus defines the observed state of StsOperatorConfig
@@ -106,7 +106,8 @@ type StsOperatorConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   StsOperatorConfigSpec   `json:"spec"`
+	// +kubebuilder:validation:Required
+	Spec   StsOperatorConfigSpec   `json:"spec,omitempty"`
 	Status StsOperatorConfigStatus `json:"status,omitempty"`
 }
 

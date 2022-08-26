@@ -615,21 +615,21 @@ spec:
   replaces: silicom-sts-operator.v0.0.7
   version: 0.0.8
   relatedImages:
-  - image: quay.io/silicom/gpsd@sha256:fd6782035d2e6fc4fdbbcdf5cb10b776092255ca67331821ebc47c5d76ef6e01
+  - image: quay.io/silicom/gpsd@sha256:b1c18257132644551cbc02d21eca2856c4c33b7fb55fef57d2c36f4845e5bf9d
     name: gpsd
-  - image: quay.io/silicom/phc2sys@sha256:290fb03158af755984515dc6e45bdb61060019ca6957525533e450a36057bf1e
+  - image: quay.io/silicom/phc2sys@sha256:5646d7f861be705d33625e32b2a0608f8a294b7b6f63c818925775ba9a49d317
     name: phc2sys
-  - image: quay.io/silicom/tsyncd@sha256:3a53038b4aaa79009e71dd84df6f02890926d4b9c82715ec1920a85460519bbf
+  - image: quay.io/silicom/tsyncd@sha256:c8c7d77ce57997d65a73757f73c5137e248b514974bffde9f4bfc1e84637cdce
     name: tsyncd
-  - image: quay.io/silicom/grpc-tsyncd@sha256:fdd5cf87602f65ce2b6d320aef9655068cfca34616c856b505fcbd1ded74fb12
+  - image: quay.io/silicom/grpc-tsyncd@sha256:7c721a544937f7b584f3dc47d7d0f582844283b8c63f5fe26477d5499f19fc4a
     name: grpc-tsyncd
-  - image: quay.io/silicom/tsync_extts@sha256:e02e65a711614082763515df948d5dab65cc56d45481d4dc57c7eca730263070
+  - image: quay.io/silicom/tsync_extts@sha256:340aae1afee2a0f8ac0220ac05681d86f4d71934c1374f2d942aff602872a2d7
     name: tsync_extts
-  - image: quay.io/silicom/sts-plugin@sha256:0e41967c6e4e7ff4bd27bc0502d6627831023867781ef92cde6c4abbd3c57e87
+  - image: quay.io/silicom/sts-plugin@sha256:77354b324c6e09b182bca27554a2a96ce8bfe214001417a7db4038110870b406
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:8982d423ad479a495b38be3a84f749eb4d1591686a5ed5f8fd5e92fa16a9b7ab
+  - image: quay.io/silicom/sts-operator@sha256:0147da2ac7b6fd6eca2a7b5a286ff59d941d15de6f3ad17e71e3e775d1ea2b92
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy

@@ -91,13 +91,13 @@ func (r *StsOperatorConfigReconciler) Reconcile(ctx context.Context, req ctrl.Re
 	err = r.DeployNfd(operatorCfg)
 	if err != nil {
 		reqLogger.Error(err, "Failed to create NFD CR")
-		return ctrl.Result{}, err
+		return ctrl.Result{RequeueAfter: 30}, nil
 	}
 
 	err = r.DeploySro(operatorCfg)
 	if err != nil {
 		reqLogger.Error(err, "Failed to deploy SRO requirements")
-		return ctrl.Result{}, err
+		return ctrl.Result{RequeueAfter: 30}, nil
 	}
 
 	err = r.DeployPlugin(operatorCfg)

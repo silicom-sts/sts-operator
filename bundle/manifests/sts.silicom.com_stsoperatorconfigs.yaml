@@ -35,12 +35,14 @@ spec:
             description: StsOperatorConfigSpec defines the desired state of StsOperatorConfig
             properties:
               images:
+                default:
+                  tsyncd: quay.io/silicom/tsyncd:2.1.2.8
                 properties:
                   gpsd:
                     default: quay.io/silicom/gpsd:3.23.1
                     type: string
                   grpcTsyncd:
-                    default: quay.io/silicom/grpc-tsyncd:2.1.2.5
+                    default: quay.io/silicom/grpc-tsyncd:2.1.2.8
                     type: string
                   phc2sys:
                     default: quay.io/silicom/phc2sys:3.1.1
@@ -52,13 +54,15 @@ spec:
                     default: quay.io/silicom/tsync_extts:1.0.0
                     type: string
                   tsyncd:
-                    default: quay.io/silicom/tsyncd:2.1.2.5
+                    default: quay.io/silicom/tsyncd:2.1.2.8
                     type: string
                 type: object
               sro:
+                default:
+                  build: false
                 properties:
                   build:
-                    default: true
+                    default: false
                     type: boolean
                   chart:
                     properties:
@@ -118,8 +122,6 @@ spec:
           status:
             description: StsOperatorConfigStatus defines the observed state of StsOperatorConfig
             type: object
-        required:
-        - spec
         type: object
     served: true
     storage: true

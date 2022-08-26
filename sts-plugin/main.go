@@ -6,13 +6,10 @@ package main
 import (
 	"bufio"
 	"context"
-	"encoding/json"
 	"fmt"
-	"net"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"time"
 
@@ -115,74 +112,6 @@ func query_host(stsNode *stsv1alpha1.StsNode) {
 	}
 }
 
-/*
-{"class":"POLL","time":"2010-06-04T10:31:00.289Z","active":1,
-    "tpv":[{"class":"TPV","device":"/dev/ttyUSB0",
-            "time":"2010-09-08T13:33:06.095Z",
-            "ept":0.005,"lat":40.035093060,
-            "lon":-75.519748733,"track":99.4319,"speed":0.123,"mode":2}],
-*/
-func query_gpsd(svc_str string, stsNode *stsv1alpha1.StsNode) {
-	var status GPSStatusRsp
-	var gpsRsp GpsVersionRsp
-
-	conn, err := net.Dial("tcp", svc_str)
-	if err != nil {
-		fmt.Println(fmt.Sprintf("Dial failed: %s: %v\n", svc_str, err))
-		return
-	}
-	defer conn.Close()
-
-	// {"class":"VERSION","release":"3.23","rev":"3.23","proto_major":3,"proto_minor":14}
-	r := bufio.NewReader(conn)
-
-	rsp, _ := r.ReadString('\n')
-	if len(rsp) < 1 {
-		fmt.Printf("Bad GPS Read: %s\n", rsp)
-		return
-	}
-
-	err = json.Unmarshal([]byte(rsp), &gpsRsp)
-	if err != nil {
-		fmt.Println("Error occured during gpsRsp unmarshaling.")
-		return
-	}
-
-	fmt.Fprintf(conn, "?WATCH={\"enable\":true}")
-	fmt.Fprintf(conn, "?POLL;")
-
-	for {
-		rsp, _ = r.ReadString('\n')
-		if len(rsp) < 1 {
-			fmt.Printf("Bad GPS Read: %s\n", rsp)
-			return
-		}
-
-		err = json.Unmarshal([]byte(rsp), &status)
-		if err != nil {
-			fmt.Println("Error occured during unmarshaling.")
-			return
-		}
-
-		//  {"class":"POLL","time":"2021-11-29T13:46:36.790Z","active":0,
-		if status.Class != "POLL" {
-			continue
-		}
-
-		break
-	}
-
-	stsNode.Status.GpsStatus.Time = status.Time
-	stsNode.Status.GpsStatus.Active = status.Active
-	if len(status.Tpvs) > 0 {
-		stsNode.Status.GpsStatus.Device = status.Tpvs[0].Device
-		stsNode.Status.GpsStatus.Time = status.Tpvs[0].Time
-		stsNode.Status.GpsStatus.Lat = fmt.Sprintf("%f", status.Tpvs[0].Lat)
-		stsNode.Status.GpsStatus.Lon = fmt.Sprintf("%f", status.Tpvs[0].Lon)
-		stsNode.Status.GpsStatus.Mode = status.Tpvs[0].Mode
-	}
-}
-
 func main() {
 	var node corev1.Node
 	stsNode := &stsv1alpha1.StsNode{}
@@ -191,9 +120,6 @@ func main() {
 
 	stsNode.Name = nodeName
 	stsNode.Namespace = namespace
-
-	gpsSvcPort, _ := strconv.Atoi(os.Getenv("GPS_SVC_PORT"))
-	gpsSvcStr := fmt.Sprintf("%.8s-gpsd:%d", nodeName, gpsSvcPort)
 
 	config, err := rest.InClusterConfig()
 	if err != nil {
@@ -243,11 +169,6 @@ func main() {
 			fmt.Printf("Update failed: %v\n", err)
 		}
 
-		query_gpsd(gpsSvcStr, stsNode)
-
-		if err := k8sClient.Status().Update(context.TODO(), stsNode); err != nil {
-			fmt.Printf("Update failed: %v\n", err)
-		}
 		time.Sleep(30 * time.Second)
 	}
 }
