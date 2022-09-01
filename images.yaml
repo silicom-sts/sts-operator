@@ -3,11 +3,11 @@
     name: gpsd
   - image: quay.io/silicom/phc2sys@sha256:5646d7f861be705d33625e32b2a0608f8a294b7b6f63c818925775ba9a49d317
     name: phc2sys
-  - image: quay.io/silicom/tsyncd@sha256:c8c7d77ce57997d65a73757f73c5137e248b514974bffde9f4bfc1e84637cdce
+  - image: quay.io/silicom/tsyncd@sha256:e4ef9aa7a005cb894c59f271bde14f4240b801b92f8f9151512131c6a11a0726
     name: tsyncd
-  - image: quay.io/silicom/grpc-tsyncd@sha256:7c721a544937f7b584f3dc47d7d0f582844283b8c63f5fe26477d5499f19fc4a
+  - image: quay.io/silicom/grpc-tsyncd@sha256:c703d059ae0788b87eb7594f9e1679bfe0733b4ef1daf59158673287accc4256
     name: grpc-tsyncd
-  - image: quay.io/silicom/tsync_extts@sha256:340aae1afee2a0f8ac0220ac05681d86f4d71934c1374f2d942aff602872a2d7
+  - image: quay.io/silicom/tsync_extts@sha256:d8245f3dc3bf67ec93f5db0fa95abe174df92c61f10ffcb247bea06dcf83ccfe
     name: tsync_extts
   - image: quay.io/silicom/sts-plugin@sha256:371b063061bf66403e1fa7329acbd574a38d443b5c3c7ebcf2a30a0dc1e63282
     name: sts-plugin
