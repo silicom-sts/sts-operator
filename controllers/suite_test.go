@@ -30,7 +30,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	stsv1alpha1 "github.com/silicomdk/sts-operator/api/v1alpha1"
+	stsv1alpha1 "github.com/rmr/sts-operator/api/v1alpha1"
 	//+kubebuilder:scaffold:imports
 )
 

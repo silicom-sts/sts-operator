@@ -29,8 +29,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
-	stsv1alpha1 "github.com/silicomdk/sts-operator/api/v1alpha1"
-	"github.com/silicomdk/sts-operator/controllers"
+	stsv1alpha1 "github.com/rmr/sts-operator/api/v1alpha1"
+	"github.com/rmr/sts-operator/controllers"
 	//+kubebuilder:scaffold:imports
 )
 

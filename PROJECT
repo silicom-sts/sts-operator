@@ -5,7 +5,7 @@ plugins:
   manifests.sdk.operatorframework.io/v2: {}
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: silicom-sts-operator
-repo: github.com/silicomdk/sts-operator
+repo: github.com/rmr/sts-operator
 resources:
 - api:
     crdVersion: v1
@@ -14,7 +14,7 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsConfig
-  path: github.com/silicomdk/sts-operator/api/v1alpha1
+  path: github.com/rmr/sts-operator/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -23,7 +23,7 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsNode
-  path: github.com/silicomdk/sts-operator/api/v1alpha1
+  path: github.com/rmr/sts-operator/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -32,6 +32,6 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsOperatorConfig
-  path: github.com/silicomdk/sts-operator/api/v1alpha1
+  path: github.com/rmr/sts-operator/api/v1alpha1
   version: v1alpha1
 version: "3"

@@ -69,7 +69,7 @@ CRD_OPTIONS ?= "crd:trivialVersions=true,preserveUnknownFields=false"
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.21
 
-COMMUNITY_PROD_OPERATORS_GIT := https://github.com/silicomDK/community-operators-prod.git
+COMMUNITY_PROD_OPERATORS_GIT := https://github.com/rmr/community-operators-prod.git
 COMMUNITY_PROD_OPERATORS_DIR := community-operators-prod
 OPERATOR_NAME			:= silicom-sts-operator
 

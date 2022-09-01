@@ -1,4 +1,4 @@
-module github.com/silicomdk/sts-plugin
+module github.com/rmr/sts-plugin
 
 go 1.16
 
