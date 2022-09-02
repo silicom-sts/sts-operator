@@ -338,6 +338,23 @@ plugin:
 		--build-arg STS_VERSION=$(VERSION) \
 		-f Dockerfile.plugin
 
+all-sts:
+	rm -rf bundle
+	make docker-build
+	make docker-push
+	make plugin
+	make plugin-push
+	make update-images
+	make bundle
+	make bundle-build
+	make catalog-build
+	make catalog-push
+	make preflight-all
+	-rm -rf certified-operators
+	make certified-clone
+	mkdir -p certified-operators/operators/silicom-sts-operator/$(IMG_VERSION)
+	make certified-bundle
+
 plugin-push:
 	docker push $(IMAGE_REGISTRY)/sts-plugin:$(IMG_VERSION)
 
