@@ -226,8 +226,14 @@ spec:
 {{- else}}
             value: "false"
 {{- end}}
+{{- if eq .ProfileId 2}}
+          - name: GM_MODE
+            value: "-g"
+{{end}}
           - name: GPS_SVC_PORT
             value: "2947"
+          - name: STS_Cpu
+            value: 1
         volumeMounts:
           - name: devfs
             mountPath: /dev
@@ -241,28 +247,6 @@ spec:
           capabilities:
             add:
             - CAP_SYS_ADMIN
-      - image: {{.StsOperatorConfig.Spec.Images.TsyncExtts}}
-        name: {{.NodeName}}-tsyncextts
-        imagePullPolicy: Always
-        network_mode: host
-        securityContext:
-          privileged: true
-        volumeMounts:
-          - name: devfs
-            mountPath: /dev
-        env:
-          - name: WAIT_FOR_GPS
-{{- if .EnableGPS}}
-            value: "true"
-{{- else}}
-            value: "false"
-{{end}}
-{{- if eq .ProfileId 2}}
-          - name: GM_MODE
-            value: "-g"
-{{end}}
-          - name: GPS_SVC_PORT
-            value: "2947"
       - image: {{.StsOperatorConfig.Spec.Images.Gpsd}}
         imagePullPolicy: Always
         name: {{.NodeName}}-gpsd
