@@ -14,4 +14,8 @@ Remove pullPolicy: Always to whenNotPresent or similar.
 
 Remove prefix-service
 
+Cleanup controller-manager because it does not need root access or GPS port information.
+
 Do we need gps services exposed?
+
+Expand the kind test to include SRO
