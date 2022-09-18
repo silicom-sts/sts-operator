@@ -625,7 +625,7 @@ spec:
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:48219c37fbbc6b2022added2581c306c5472aff863a33e4a51aaf7a8df5b9940
+  - image: quay.io/silicom/sts-operator@sha256:6d6fe366ca20e2c8b3faf48e6aafa7104ed32bcc75babdf4f33940ee7e2408d7
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy

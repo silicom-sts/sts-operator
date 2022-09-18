@@ -222,7 +222,7 @@ func (r *StsConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		cfgTemplate.StsConfig = stsConfig
 		cfgTemplate.StsOperatorConfig = operatorCfg
 		cfgTemplate.NodeName = node.Name
-		cfgTemplate.ServicePrefix = fmt.Sprintf("%.8s", node.Name)
+		cfgTemplate.ServicePrefix = fmt.Sprintf("%.7sp", node.Name)
 
 		r.interfacesToBitmask(cfgTemplate, stsConfig.Spec.Interfaces)
 

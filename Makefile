@@ -210,6 +210,9 @@ operator-sdk: bin
 .PHONY: all bundle
 bundle: manifests kustomize ## Generate bundle manifests and metadata, then validate generated files.
 #	- rm  bundle/manifests/silicom-sts-operator.clusterserviceversion.yaml
+	sed -i 's/sts-plugin:.*[^"]/sts-plugin:$(OPERATOR_VER)/g' api/v1alpha1/stsoperatorconfig_types.go
+	sed -i 's/tsyncd:.*[^"}]/tsyncd:$(TSYNC_VERSION)/g' api/v1alpha1/stsoperatorconfig_types.go
+	sed -i 's/grpc-tsyncd:.*[^"}]/grpc-tsyncd:$(TSYNC_VERSION)/g' api/v1alpha1/stsoperatorconfig_types.go
 	bin/operator-sdk generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
 	$(KUSTOMIZE) build config/manifests | bin/operator-sdk generate bundle --overwrite -q --version $(VERSION) $(BUNDLE_METADATA_OPTS) $(EXTRA_SERVICE_ACCOUNTS)

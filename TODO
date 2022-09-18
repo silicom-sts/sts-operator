@@ -1,37 +1,17 @@
-- Use StsNode to contain information about individual nodes.
-- Integrate gpsd and tsyncd clients on each node, using sts-discover.
-- Smarter reconcile loop
-- Use labels for what??
-- Names are determined by node names, but they might be too long?
-- Different query times for different information?
-- Implement alarm streaming
-- Implement prometheus stats
-    - Using /metrics API?
-- Remotely, through gRPC, configure tsyncd
+- Fix service names for long hostnames
 
 Better cleanup and re-creation.
 
-~~Figure out what namespaces, how many possible, etc.~~
-
-~~Remove references to sts-silicom namespace in config/rbac !!! DONE.~~
-
-~~Rbac not supposed to be in assets/~~
-
 Github auto build and push to quay.io to master->dev, production->production
-
-~~Default values into sample sample. DONE... kinda, for now~~
-
-~~STS build sro remove affine... DONE~~
 
 Changes on nodes... OWNS() ???? Then config is applied when label is changed
 
-~~CRD comments on top of types fields. DONE... kinda, for now~~
-
 Add status stuff to STSnode status
-
-Plugin determines if driver is to be build or not based on node sysfs information.
 
 Use watches for controller to get label changes on nodes
 
 Remove pullPolicy: Always to whenNotPresent or similar.
- 
+
+Remove prefix-service
+
+Do we need gps services exposed?
