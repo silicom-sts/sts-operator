@@ -1,0 +1,21 @@
+apiVersion: sts.silicom.com/v1alpha1
+kind: StsConfig
+metadata:
+  name: bc-1
+  namespace: default
+spec:
+  namespace: default
+  nodeSelector:
+    sts.silicom.com/config: "bc-1"
+  mode: T-BC-8275.1
+  stsCpu: 9
+  interfaces:
+    - ethName: enp2s0f0
+      synce: 1
+      holdoff: 500
+      mode: Slave
+      ethPort: 1
+      ql: 4
+      qlEnable: 1
+      ipv4: 1
+      ipv6: 1

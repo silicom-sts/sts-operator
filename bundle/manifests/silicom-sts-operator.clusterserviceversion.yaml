@@ -8,37 +8,6 @@ metadata:
           "apiVersion": "sts.silicom.com/v1alpha1",
           "kind": "StsConfig",
           "metadata": {
-            "name": "gm-1",
-            "namespace": "openshift-operators"
-          },
-          "spec": {
-            "interfaces": [
-              {
-                "ethName": "enp2s0f0",
-                "ethPort": 0,
-                "holdoff": 500,
-                "mode": "Master",
-                "synce": 1
-              },
-              {
-                "ethName": "enp2s0f1",
-                "ethPort": 1,
-                "holdoff": 500,
-                "mode": "Master",
-                "synce": 1
-              }
-            ],
-            "mode": "T-GM.8275.1",
-            "namespace": "openshift-operators",
-            "nodeSelector": {
-              "sts.silicom.com/config": "gm-1"
-            }
-          }
-        },
-        {
-          "apiVersion": "sts.silicom.com/v1alpha1",
-          "kind": "StsConfig",
-          "metadata": {
             "name": "bc-1"
           },
           "spec": {
@@ -96,6 +65,32 @@ metadata:
             "synceRecClkPort": 0,
             "tracePtpMsg": -1,
             "twoStep": 0
+          }
+        },
+        {
+          "apiVersion": "sts.silicom.com/v1alpha1",
+          "kind": "StsConfig",
+          "metadata": {
+            "name": "gm-1"
+          },
+          "spec": {
+            "interfaces": [
+              {
+                "ethName": "enp2s0f0",
+                "ethPort": 1,
+                "holdoff": 500,
+                "ipv4": 1,
+                "ipv6": 1,
+                "mode": "Master",
+                "ql": 4,
+                "qlEnable": 1,
+                "synce": 1
+              }
+            ],
+            "mode": "T-GM.8275.1",
+            "nodeSelector": {
+              "sts.silicom.com/config": "gm-1"
+            }
           }
         },
         {
@@ -626,11 +621,11 @@ spec:
     name: tsyncd
   - image: quay.io/silicom/grpc-tsyncd@sha256:c703d059ae0788b87eb7594f9e1679bfe0733b4ef1daf59158673287accc4256
     name: grpc-tsyncd
-  - image: quay.io/silicom/sts-plugin@sha256:e233bc49a75d324e1d958c83c93c040329f14a7f42da8c9e204fbfaf879765f7
+  - image: quay.io/silicom/sts-plugin@sha256:e6067ba4d146675d114b71a02bda65c09196416fa8d25c9f8e27a0d706e8080c
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:eaeee236ff9e21cd239928735e804e85e777a193421ce6bcdfaa564f5a5fb97a
+  - image: quay.io/silicom/sts-operator@sha256:48219c37fbbc6b2022added2581c306c5472aff863a33e4a51aaf7a8df5b9940
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy

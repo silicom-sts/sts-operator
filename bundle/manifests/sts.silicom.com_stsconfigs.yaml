@@ -83,6 +83,8 @@ spec:
                 minimum: 0
                 type: integer
               gnssSpec:
+                default:
+                  gnssSigGpsEn: 1
                 properties:
                   gnssAntSet:
                     default: 1

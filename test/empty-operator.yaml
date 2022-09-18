@@ -1,0 +1,5 @@
+apiVersion: sts.silicom.com/v1alpha1
+kind: StsOperatorConfig
+metadata:
+  name: sts-operator-config
+spec: {}
