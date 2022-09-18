@@ -75,17 +75,13 @@ type StsImages struct {
 	// +kubebuilder:validation:Required
 	GrpcTsyncd string `json:"grpcTsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.0.9"
+	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.1.0"
 	// +kubebuilder:validation:Required
 	StsPlugin string `json:"stsPlugin,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/gpsd:3.23.1"
 	// +kubebuilder:validation:Required
 	Gpsd string `json:"gpsd,omitempty"`
-
-	// +kubebuilder:default:string="quay.io/silicom/tsync_extts:1.0.0"
-	// +kubebuilder:validation:Required
-	TsyncExtts string `json:"tsyncExtts,omitempty"`
 
 	// +kubebuilder:default:string="quay.io/silicom/phc2sys:3.1.1"
 	// +kubebuilder:validation:Required

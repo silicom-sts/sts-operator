@@ -19,7 +19,6 @@ PREFLIGHT_TARGETS := preflight-tsyncd
 PREFLIGHT_TARGETS += preflight-operator
 PREFLIGHT_TARGETS += preflight-plugin
 PREFLIGHT_TARGETS += preflight-phc2sys
-PREFLIGHT_TARGETS += preflight-tsync-extts
 PREFLIGHT_TARGETS += preflight-gpsd
 PREFLIGHT_TARGETS += preflight-grpc-tsyncd
 
@@ -279,13 +278,6 @@ preflight-plugin: ## Check sts-plugin with preflight and upload results.
 		--docker-config=$(shell pwd)/config.json \
 		--submit
 
-preflight-tsync-extts: ## Check tsync-extts with preflight and upload results.
-	$(PREFLIGHT) check container \
-		$(shell $(YQ) '.relatedImages.[] | select(.name == "tsync_extts") | .image ' images.yaml) \
-		--certification-project-id=6218d3eddcb47fcb3e58558e \
-		--docker-config=$(shell pwd)/config.json \
-		--submit
-
 preflight-gpsd: ## Check gpsd with preflight and upload results.
 	$(PREFLIGHT) check container \
 		$(shell $(YQ) '.relatedImages.[] | select(.name == "gpsd") | .image ' images.yaml) \
@@ -347,6 +339,7 @@ all-sts:
 	make update-images
 	make bundle
 	make bundle-build
+	make bundle-push
 	make catalog-build
 	make catalog-push
 	make preflight-all
@@ -394,7 +387,6 @@ update-images:
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/sts-plugin:$(OPERATOR_VER))"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/tsyncd:$(TSYNC_VERSION) )"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/grpc-tsyncd:$(TSYNC_VERSION))"
-	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/tsync_extts:1.0.0)"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/phc2sys:3.1.1)"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/ice-driver-src:$(ICE_VERSION))"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/sts-operator:$(OPERATOR_VER))"
@@ -408,8 +400,6 @@ update-images:
 	@echo "    name: tsyncd" >> images.yaml
 	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/grpc-tsyncd:$(TSYNC_VERSION) --format '{{ index .RepoDigests 0 }}')" >> images.yaml
 	@echo "    name: grpc-tsyncd" >> images.yaml
-	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/tsync_extts:1.0.0 --format '{{ index .RepoDigests 0 }}')" >> images.yaml
-	@echo "    name: tsync_extts" >> images.yaml
 	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/sts-plugin:$(VERSION) --format '{{ index .RepoDigests 0 }}')" >> images.yaml
 	@echo "    name: sts-plugin" >> images.yaml
 	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/ice-driver-src:$(ICE_VERSION) --format '{{ index .RepoDigests 0 }}')" >> images.yaml

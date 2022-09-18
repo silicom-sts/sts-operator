@@ -62,6 +62,13 @@ spec:
                 maximum: 2
                 minimum: 1
                 type: integer
+              eventMask:
+                default: 3
+                description: "Event type mask Valid range 0-3 (3 is default) \n Bit
+                  0 - Alarm \n Bit 1 - Info"
+                maximum: 3
+                minimum: 0
+                type: integer
               forwardable:
                 default: 1
                 description: "Forwardable/Non-Forwardable Multicast Address \n 0 -
@@ -88,7 +95,7 @@ spec:
                     type: integer
                   gnssCableDelay:
                     description: "Antenna cable delay settings (nsec) Valid range
-                      +-50,000,000 \n     N - nanoseconds"
+                      +-50,000,000 \n     N - nanoseconds \n // +kubebuilder:validation:Required"
                     maximum: 50000000
                     minimum: -50000000
                     type: integer
@@ -99,11 +106,18 @@ spec:
                     maximum: 1
                     minimum: 0
                     type: integer
+                  gnssCwTh:
+                    default: 50
+                    description: GNSS CW Jamming Detection Threshold (dB) Valid range
+                      0-255
+                    maximum: 255
+                    minimum: 0
+                    type: integer
                   gnssDutyLockTP1:
                     default: 10
                     description: "Set Time Pulse Duty Cycle (%), when locked to GNSS
                       time, for the first Time Pulse Valid range 0-100 \n     10 -
-                      (default)"
+                      (default) \n // +kubebuilder:validation:Required"
                     maximum: 100
                     minimum: 0
                     type: integer
@@ -111,28 +125,29 @@ spec:
                     default: 50
                     description: "Set Time Pulse Duty Cycle (%), when locked to GNSS
                       time, for the second Time Pulse Valid range 0-100 \n     50
-                      - (default)"
+                      - (default) \n // +kubebuilder:validation:Required"
                     maximum: 100
                     minimum: 0
                     type: integer
                   gnssDutyTP1:
                     default: 1
                     description: "Set Time Pulse Duty Cycle (%) for the first Time
-                      Pulse Valid range 0-100 \n     0 - (default)"
+                      Pulse Valid range 0-100 \n     0 - (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssDutyTP2:
                     default: 0
                     description: "Set Time Pulse Duty Cycle (%) for the second Time
-                      Pulse Valid range 0-100 \n     0 - (default)"
+                      Pulse Valid range 0-100 \n     0 - (default) \n // +kubebuilder:validation:Required"
                     maximum: 100
                     minimum: 0
                     type: integer
                   gnssFreqLockTP1:
                     default: 1
                     description: "Set Time pulse Frequency (Hz), when locked to GNSS
-                      time, for the first Time Pulse Valid range \n     1 - (default)"
+                      time, for the first Time Pulse Valid range \n     1 - (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -140,19 +155,19 @@ spec:
                     default: 10000000
                     description: "Set Time pulse Frequency (Hz), when locked to GNSS
                       time, for the second Time Pulse Valid range \n     10000000
-                      - (default)"
+                      - (default) \n // +kubebuilder:validation:Required"
                     type: integer
                   gnssFreqTP1:
                     default: 1
                     description: "Set Time Pulse Frequency (Hz) for the first Time
-                      Pulse Valid range \n     1 - (default)"
+                      Pulse Valid range \n     1 - (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssFreqTP2:
                     default: 10000000
                     description: "Set Time Pulse Frequency (Hz) for the second Time
-                      Pulse Valid range \n     10000000 - (default)"
+                      Pulse Valid range \n     10000000 - (default) \n // +kubebuilder:validation:Required"
                     type: integer
                   gnssIntfDetect:
                     default: 1
@@ -181,7 +196,7 @@ spec:
                       \    N - degrees"
                     type: integer
                   gnssMinSatSig:
-                    description: "Minimum satellite signal level for navigation (dBHz)
+                    description: "Minimum satellite signal level for navigation (\tHz)
                       Valid range \n     N - dBHz"
                     type: integer
                   gnssMsgNmeaUsb:
@@ -211,7 +226,8 @@ spec:
                   gnssPulseDef:
                     default: 1
                     description: "Time Pulse is interpreted as Period or Frequency
-                      Valid range 0-1 \n     0 - Period \n     1 - Frequency (default)"
+                      Valid range 0-1 \n     0 - Period \n     1 - Frequency (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -219,7 +235,7 @@ spec:
                     default: 1
                     description: "Time Pulse Length is interpreted as Pulse Ratio
                       (%) or Length (nsec) Valid range 0-1 \n     0 - Pulse Ratio
-                      (default) \n     1 - Length"
+                      (default) \n     1 - Length \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -234,126 +250,140 @@ spec:
                   gnssSigBDSB1En:
                     default: 1
                     description: "Enable/disable BeiDou B1I Valid range 0-1 \n     0
-                      - Disable BeiDou B1I \n     1 - Enable BeiDou B1I (default)"
+                      - Disable BeiDou B1I \n     1 - Enable BeiDou B1I (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigBDSB2En:
                     default: 1
                     description: "Enable/disable BeiDou B2I Valid range 0-1 \n     0
-                      - Disable BeiDou B2I \n     1 - Enable BeiDou B2I (default)"
+                      - Disable BeiDou B2I \n     1 - Enable BeiDou B2I (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigBDSEn:
                     default: 1
                     description: "Enable/disable BeiDou Valid range 0-1 \n     0 -
-                      Disable BeiDou \n     1 - Enable BeiDou (default)"
+                      Disable BeiDou \n     1 - Enable BeiDou (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGLOEn:
                     default: 1
                     description: "Enable/disable GLONASS Valid range 0-1 \n     0
-                      - Disable GLONASS \n     1 - Enable GLONASS (default)"
+                      - Disable GLONASS \n     1 - Enable GLONASS (default) \n //
+                      +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGLOL1En:
                     default: 1
                     description: "Enable/disable GLONASS L1 Valid range 0-1 \n     0
-                      - Disable GLONASS L1 \n     1 - Enable GLONASS L1 (default)"
+                      - Disable GLONASS L1 \n     1 - Enable GLONASS L1 (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGLOL2En:
                     default: 1
                     description: "Enable/disable GLONASS L2 Valid range 0-1 \n     0
-                      - Disable GLONASS L2 \n     1 - Enable GLONASS L2 (default)"
+                      - Disable GLONASS L2 \n     1 - Enable GLONASS L2 (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGalE1En:
                     default: 1
                     description: "Enable/disable Galileo E1 Valid range 0-1 \n     0
-                      - Disable Galileo E1 \n     1 - Enable Galileo E1 (default)"
+                      - Disable Galileo E1 \n     1 - Enable Galileo E1 (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGalE5BEn:
                     default: 1
                     description: "Enable/disable Galileo E5b Valid range 0-1 \n     0
-                      - Disable Galileo E5b \n     1 - Enable Galileo E5b (default)"
+                      - Disable Galileo E5b \n     1 - Enable Galileo E5b (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGalEn:
                     default: 1
                     description: "Enable/disable Galileo Valid range 0-1 \n     0
-                      - Disable Galileo \n     1 - Enable Galileo (default)"
+                      - Disable Galileo \n     1 - Enable Galileo (default) \n //
+                      +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGpsEn:
                     default: 1
                     description: "Enable/disable GPS \n Valid range 0-1 \n 0 - Disable
-                      GPS \n 1 - Enable GPS (default)"
+                      GPS \n 1 - Enable GPS (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGpsL1CAEn:
                     default: 1
                     description: "Enable/disable GPS L1C/A Valid range 0-1 \n     0
-                      - Disable GPS L1C/A \n     1 - Enable GPS L1C/A (default)"
+                      - Disable GPS L1C/A \n     1 - Enable GPS L1C/A (default) \n
+                      // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigGpsL2CEn:
                     default: 1
                     description: "Enable/disable GPS L2C Valid range 0-1 \n     0
-                      - Disable GPS L2C \n     1 - Enable GPS L2C (default)"
+                      - Disable GPS L2C \n     1 - Enable GPS L2C (default) \n //
+                      +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigQZSSEn:
                     default: 1
                     description: "Enable/disable QZSS Valid range 0-1 \n     0 - Disable
-                      QZSS \n     1 - Enable QZSS (default)"
+                      QZSS \n     1 - Enable QZSS (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigQZSSL1CAEn:
                     default: 1
                     description: "Enable/disable QZSS L1C/A Valid range 0-1 \n     0
-                      - Disable QZSS L1C/A \n     1 - Enable QZSS L1C/A (default)"
+                      - Disable QZSS L1C/A \n     1 - Enable QZSS L1C/A (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigQZSSL1SEn:
                     default: 1
                     description: "Enable/disable QZSS L1S Valid range 0-1 \n     0
-                      - Disable QZSS L1S (default) \n     1 - Enable QZSS L1S"
+                      - Disable QZSS L1S (default) \n     1 - Enable QZSS L1S \n //
+                      +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigQZSSL2CEn:
                     default: 1
                     description: "Enable/disable QZSS L2C Valid range 0-1 \n     0
-                      - Disable QZSS L2C \n     1 - Enable QZSS L2C (default)"
+                      - Disable QZSS L2C \n     1 - Enable QZSS L2C (default) \n //
+                      +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigSBASEn:
                     default: 1
                     description: "Enable/disable SBAS Valid range 0-1 \n     0 - Disable
-                      SBAS \n     1 - Enable SBAS (default)"
+                      SBAS \n     1 - Enable SBAS (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssSigSBASL1CAEn:
                     default: 1
                     description: "Enable/disable SBAS L1C/A Valid range 0-1 \n     0
-                      - Disable SBAS L1C/A (default) \n     1 - Enable SBAS L1C/A"
+                      - Disable SBAS L1C/A (default) \n     1 - Enable SBAS L1C/A
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -370,14 +400,15 @@ spec:
                   gnssTP1En:
                     default: 0
                     description: "Enable/disable the first Time Pulse Valid range
-                      0-1 \n     0 - Disable  (default) \n     1 - Enable"
+                      0-1 \n     0 - Disable  (default) \n     1 - Enable \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
                   gnssTP2En:
                     default: 0
                     description: "Enable/disable the second Time Pulse (10 MHz) Valid
-                      range 0-1 \n     0 - Disable  (default) \n     1 - Enable (default)"
+                      range 0-1 \n     0 - Disable  (default) \n     1 - Enable (default)
+                      \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -385,7 +416,7 @@ spec:
                     default: 1
                     description: "Use locked parameters, when possible, for the first
                       Time Pulse Valid range 0-1 \n     0 - Disable \n     1 - Enable
-                      (default)"
+                      (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
@@ -393,11 +424,65 @@ spec:
                     default: 1
                     description: "Use locked parameters, when possible, for the second
                       Time Pulse Valid range 0-1 \n     0 - Disable \n     1 - Enable
-                      (default)"
+                      (default) \n // +kubebuilder:validation:Required"
                     maximum: 1
                     minimum: 0
                     type: integer
+                required:
+                - gnssAntSet
+                - gnssCableDelay
+                - gnssClockOutEn
+                - gnssCwTh
+                - gnssDutyLockTP1
+                - gnssDutyLockTP2
+                - gnssDutyTP1
+                - gnssDutyTP2
+                - gnssFreqLockTP1
+                - gnssFreqLockTP2
+                - gnssFreqTP1
+                - gnssFreqTP2
+                - gnssIntfDetect
+                - gnssLockMode
+                - gnssLockTh
+                - gnssMinElev
+                - gnssMinSatSig
+                - gnssMsgNmeaUsb
+                - gnssMsgUbxUsb
+                - gnssPulseDef
+                - gnssPulseLenDef
+                - gnssRecvTMode
+                - gnssSigBDSB1En
+                - gnssSigBDSB2En
+                - gnssSigBDSEn
+                - gnssSigGLOEn
+                - gnssSigGLOL1En
+                - gnssSigGLOL2En
+                - gnssSigGalE1En
+                - gnssSigGalE5BEn
+                - gnssSigGalEn
+                - gnssSigGpsEn
+                - gnssSigGpsL1CAEn
+                - gnssSigGpsL2CEn
+                - gnssSigQZSSEn
+                - gnssSigQZSSL1CAEn
+                - gnssSigQZSSL1SEn
+                - gnssSigQZSSL2CEn
+                - gnssSigSBASEn
+                - gnssSigSBASL1CAEn
+                - gnssSvinAccLimit
+                - gnssSvinMinDur
+                - gnssTP1En
+                - gnssTP2En
+                - gnssUseLockTP1
+                - gnssUseLockTP2
                 type: object
+              gpsdDbgLevel:
+                default: 2
+                description: "GPSD Debug Level Valid range 1-5 \n 1 - Alert \n 2 -
+                  Critical (default) \n 3 - Error \n 4 - Warning \n 5 - Notice"
+                maximum: 5
+                minimum: 1
+                type: integer
               interfaces:
                 items:
                   properties:
@@ -465,6 +550,7 @@ spec:
                       type: integer
                   required:
                   - ethName
+                  - ethPort
                   type: object
                 type: array
               localClockPriority:
@@ -476,8 +562,8 @@ spec:
                 type: integer
               mode:
                 default: T-GM.8275.1
-                description: "Telecom G8275 Profile \n T-BC-8275.1 (default) \n T-GM.8275.1
-                  \n T-TSC.8275.1"
+                description: "Telecom G8275 Profile \n T-BC-8275.1 \n T-GM.8275.1
+                  \ (default) \n T-TSC.8275.1 \n T-GM.8275.2 \n T-BC-P-8275.2"
                 enum:
                 - T-GM.8275.1
                 - T-BC-8275.1
@@ -500,12 +586,26 @@ spec:
                 minimum: 1
                 type: integer
               namespace:
-                default: sts-silicom
+                default: openshift-operators
                 type: string
               nodeSelector:
                 additionalProperties:
                   type: string
                 type: object
+              phaseOfstEn_GM:
+                default: 0
+                description: "Enable/disable Frame Phase Offset for GM Valid range
+                  0-1 \n     0 - Disable Offset (default) \n     1 - Enable Offset"
+                maximum: 1
+                minimum: 0
+                type: integer
+              phaseOfstVal_GM:
+                default: 1948960
+                description: "Set Frame Phase Offset Value for GM Valid range 1947460-1950460
+                  nsec \n 1948960 - (default)"
+                maximum: 1950460
+                minimum: 1947460
+                type: integer
               phyLedsCtl:
                 default: 0
                 description: "Enable/disable Phy Leds Control Switch \n 0 - disable
@@ -543,7 +643,7 @@ spec:
                 minimum: 1
                 type: integer
               stsCpu:
-                default: 0
+                default: 1
                 description: Set CPU Pin for SyncE ESMC thread (cpu affinity on each
                   node)
                 maximum: 10
@@ -567,6 +667,13 @@ spec:
                 default: 0
                 description: Set SyncE Recovery Clock Port
                 maximum: 7
+                minimum: 0
+                type: integer
+              taccLogEn:
+                default: 0
+                description: "Enable/disable write tAcc to log Valid range 0-1 \n
+                  0 - Disable write log (default) \n 1 - Enable write log"
+                maximum: 1
                 minimum: 0
                 type: integer
               traceLevel:
@@ -628,7 +735,13 @@ spec:
                   = 1,fe80::211:22ff:fe33:4455,0,-1,-1'
                 type: string
             required:
+            - domainNum_8265_2
+            - domainNum_8275_1
+            - domainNum_8275_2
             - interfaces
+            - localClockPriority
+            - phaseOfstEn_GM
+            - phaseOfstVal_GM
             - unicastMaster
             type: object
           status:

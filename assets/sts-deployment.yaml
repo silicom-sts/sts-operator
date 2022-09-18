@@ -39,14 +39,21 @@ data:
 
     forwardable = {{.StsConfig.Spec.Forwardable}}
     twoStep = {{.StsConfig.Spec.TwoStep}}
+    freerunSQ = {{.StsConfig.Spec.FreerunSQ}}
     priority2 = {{.StsConfig.Spec.Priority2}}
+    unicastMaster = {{.StsConfig.Spec.UnicastMaster}}
+
     modePPS = {{.StsConfig.Spec.ModePPS}}
     srcPPS = {{.StsConfig.Spec.SrcPPS}}
     src10MHz = {{.StsConfig.Spec.Src10MHz}}
     mode10MHz = {{.StsConfig.Spec.Mode10MHz}}
     synceRecClkPort = {{.StsConfig.Spec.SynceRecClkPort}}
     syncOption = {{.StsConfig.Spec.SyncOption}}
-    stsCpu = 1
+    taccLogEn = {{.StsConfig.Spec.TaccLogEn}}
+    eventMask = {{.StsConfig.Spec.EventMask}}
+    stsCpu =  {{.StsConfig.Spec.StsCpu}}
+    phaseOfstEn_GM = {{.StsConfig.Spec.PhaseOfstEn_GM}}
+    phaseOfstVal_GM = {{.StsConfig.Spec.PhaseOfstVal_GM}}
     localClockPriority = {{.StsConfig.Spec.LocalClockPriority}}
 {{- if or (eq .ProfileId 5) (eq .ProfileId 6) (eq .ProfileId 7) (eq .ProfileId 8) (eq .ProfileId 9) }}
     ipv6PortMask = {{printf "0x%x" .Ipv6PortMask}}
@@ -67,6 +74,7 @@ data:
     whenWriteLog = 0
     debugAPI = 0
     IPCServer = 1
+    gpsdDbgLevel = {{.StsConfig.Spec.GpsdDbgLevel}}
     gnssSigGpsEn = {{.StsConfig.Spec.GnssSpec.GnssSigGpsEn}}
     gnssSigGpsL1CAEn = {{.StsConfig.Spec.GnssSpec.GnssSigGpsL1CAEn}}
     gnssSigGpsL2CEn = {{.StsConfig.Spec.GnssSpec.GnssSigGpsL2CEn}}
@@ -106,6 +114,7 @@ data:
     gnssMsgUbxUsb = {{.StsConfig.Spec.GnssSpec.GnssMsgUbxUsb}}
     gnssIntfDetect = {{.StsConfig.Spec.GnssSpec.GnssIntfDetect}}
     gnssAntSet = {{.StsConfig.Spec.GnssSpec.GnssAntSet}}
+    gnssCwTh = {{.StsConfig.Spec.GnssSpec.GnssCwTh}}
     gnssRecvTMode = {{.StsConfig.Spec.GnssSpec.GnssRecvTMode}}
     gnssSvinMinDur = {{.StsConfig.Spec.GnssSpec.GnssSvinMinDur}}
     gnssSvinAccLimit = {{.StsConfig.Spec.GnssSpec.GnssSvinAccLimit}}
@@ -233,7 +242,7 @@ spec:
           - name: GPS_SVC_PORT
             value: "2947"
           - name: STS_Cpu
-            value: 1
+            value: "{{.StsConfig.Spec.StsCpu}}"
         volumeMounts:
           - name: devfs
             mountPath: /dev
@@ -257,7 +266,7 @@ spec:
           - name: GPS_SVC_PORT
             value: "2947"
           - name: STS_Cpu
-            value: "1"
+            value: "{{.StsConfig.Spec.StsCpu}}"
         volumeMounts:
           - name: devfs
             mountPath: /dev
