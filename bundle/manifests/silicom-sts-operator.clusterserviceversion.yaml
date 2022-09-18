@@ -612,7 +612,7 @@ spec:
   provider:
     name: Silicom Ltd.
     url: http://www.silicom-usa.com
-  replaces: silicom-sts-operator.v0.0.7
+  replaces: silicom-sts-operator.v0.1.0
   skips:
   - silicom-sts-operator.v0.0.8
   - silicom-sts-operator.v0.0.9

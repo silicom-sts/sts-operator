@@ -36,8 +36,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGpsEn int `json:"gnssSigGpsEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGpsEn int `json:"gnssSigGpsEn,omitempty"`
 
 	//
 	// Enable/disable GPS L1C/A
@@ -50,8 +50,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGpsL1CAEn int `json:"gnssSigGpsL1CAEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGpsL1CAEn int `json:"gnssSigGpsL1CAEn,omitempty"`
 
 	//
 	// Enable/disable GPS L2C
@@ -64,8 +64,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGpsL2CEn int `json:"gnssSigGpsL2CEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGpsL2CEn int `json:"gnssSigGpsL2CEn,omitempty"`
 
 	//
 	// Enable/disable SBAS
@@ -78,8 +78,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigSBASEn int `json:"gnssSigSBASEn"`
+	// +kubebuilder:validation:Required
+	GnssSigSBASEn int `json:"gnssSigSBASEn,omitempty"`
 
 	//
 	// Enable/disable SBAS L1C/A
@@ -92,8 +92,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigSBASL1CAEn int `json:"gnssSigSBASL1CAEn"`
+	// +kubebuilder:validation:Required
+	GnssSigSBASL1CAEn int `json:"gnssSigSBASL1CAEn,omitempty"`
 
 	//
 	// Enable/disable Galileo
@@ -106,8 +106,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGalEn int `json:"gnssSigGalEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGalEn int `json:"gnssSigGalEn,omitempty"`
 
 	//
 	// Enable/disable Galileo E1
@@ -120,8 +120,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGalE1En int `json:"gnssSigGalE1En"`
+	// +kubebuilder:validation:Required
+	GnssSigGalE1En int `json:"gnssSigGalE1En,omitempty"`
 
 	//
 	// Enable/disable Galileo E5b
@@ -134,8 +134,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGalE5BEn int `json:"gnssSigGalE5BEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGalE5BEn int `json:"gnssSigGalE5BEn,omitempty"`
 
 	//
 	// Enable/disable BeiDou
@@ -148,8 +148,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigBDSEn int `json:"gnssSigBDSEn"`
+	// +kubebuilder:validation:Required
+	GnssSigBDSEn int `json:"gnssSigBDSEn,omitempty"`
 
 	//
 	// Enable/disable BeiDou B1I
@@ -162,8 +162,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigBDSB1En int `json:"gnssSigBDSB1En"`
+	// +kubebuilder:validation:Required
+	GnssSigBDSB1En int `json:"gnssSigBDSB1En,omitempty"`
 
 	//
 	// Enable/disable BeiDou B2I
@@ -176,8 +176,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigBDSB2En int `json:"gnssSigBDSB2En"`
+	// +kubebuilder:validation:Required
+	GnssSigBDSB2En int `json:"gnssSigBDSB2En,omitempty"`
 
 	//
 	// Enable/disable QZSS
@@ -190,8 +190,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigQZSSEn int `json:"gnssSigQZSSEn"`
+	// +kubebuilder:validation:Required
+	GnssSigQZSSEn int `json:"gnssSigQZSSEn,omitempty"`
 
 	//
 	// Enable/disable QZSS L1C/A
@@ -204,8 +204,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigQZSSL1CAEn int `json:"gnssSigQZSSL1CAEn"`
+	// +kubebuilder:validation:Required
+	GnssSigQZSSL1CAEn int `json:"gnssSigQZSSL1CAEn,omitempty"`
 
 	//
 	// Enable/disable QZSS L1S
@@ -218,8 +218,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigQZSSL1SEn int `json:"gnssSigQZSSL1SEn"`
+	// +kubebuilder:validation:Required
+	GnssSigQZSSL1SEn int `json:"gnssSigQZSSL1SEn,omitempty"`
 
 	//
 	// Enable/disable QZSS L2C
@@ -232,8 +232,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigQZSSL2CEn int `json:"gnssSigQZSSL2CEn"`
+	// +kubebuilder:validation:Required
+	GnssSigQZSSL2CEn int `json:"gnssSigQZSSL2CEn,omitempty"`
 
 	//
 	// Enable/disable GLONASS
@@ -246,8 +246,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGLOEn int `json:"gnssSigGLOEn"`
+	// +kubebuilder:validation:Required
+	GnssSigGLOEn int `json:"gnssSigGLOEn,omitempty"`
 
 	//
 	// Enable/disable GLONASS L1
@@ -260,8 +260,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGLOL1En int `json:"gnssSigGLOL1En"`
+	// +kubebuilder:validation:Required
+	GnssSigGLOL1En int `json:"gnssSigGLOL1En,omitempty"`
 
 	//
 	// Enable/disable GLONASS L2
@@ -274,8 +274,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssSigGLOL2En int `json:"gnssSigGLOL2En"`
+	// +kubebuilder:validation:Required
+	GnssSigGLOL2En int `json:"gnssSigGLOL2En,omitempty"`
 
 	//
 	// ********************************* CFG-TP- Time Pulse Configuration ******************************
@@ -289,8 +289,8 @@ type StsGnssSpec struct {
 	//
 	// +kubebuilder:validation:Minimum=-50000000
 	// +kubebuilder:validation:Maximum=50000000
-	// // +kubebuilder:validation:Required
-	GnssCableDelay int `json:"gnssCableDelay"`
+	// +kubebuilder:validation:Required
+	GnssCableDelay int `json:"gnssCableDelay,omitempty"`
 
 	//
 	// Time Pulse is interpreted as Period or Frequency
@@ -303,8 +303,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssPulseDef int `json:"gnssPulseDef"`
+	// +kubebuilder:validation:Required
+	GnssPulseDef int `json:"gnssPulseDef,omitempty"`
 
 	//
 	// Time Pulse Length is interpreted as Pulse Ratio (%) or Length (nsec)
@@ -317,8 +317,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssPulseLenDef int `json:"gnssPulseLenDef"`
+	// +kubebuilder:validation:Required
+	GnssPulseLenDef int `json:"gnssPulseLenDef,omitempty"`
 
 	//
 	// Enable/disable the first Time Pulse
@@ -331,8 +331,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssTP1En int `json:"gnssTP1En"`
+	// +kubebuilder:validation:Required
+	GnssTP1En int `json:"gnssTP1En,omitempty"`
 
 	//
 	// Set Time Pulse Frequency (Hz) for the first Time Pulse
@@ -343,8 +343,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssFreqTP1 int `json:"gnssFreqTP1"`
+	// +kubebuilder:validation:Required
+	GnssFreqTP1 int `json:"gnssFreqTP1,omitempty"`
 
 	//
 	// Set Time pulse Frequency (Hz), when locked to GNSS time, for the first Time Pulse
@@ -355,8 +355,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssFreqLockTP1 int `json:"gnssFreqLockTP1"`
+	// +kubebuilder:validation:Required
+	GnssFreqLockTP1 int `json:"gnssFreqLockTP1,omitempty"`
 
 	//
 	// Use locked parameters, when possible, for the first Time Pulse
@@ -369,8 +369,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssUseLockTP1 int `json:"gnssUseLockTP1"`
+	// +kubebuilder:validation:Required
+	GnssUseLockTP1 int `json:"gnssUseLockTP1,omitempty"`
 
 	//
 	// Set Time Pulse Duty Cycle (%) for the first Time Pulse
@@ -381,8 +381,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssDutyTP1 int `json:"gnssDutyTP1"`
+	// +kubebuilder:validation:Required
+	GnssDutyTP1 int `json:"gnssDutyTP1,omitempty"`
 
 	//
 	// Set Time Pulse Duty Cycle (%), when locked to GNSS time, for the first Time Pulse
@@ -393,8 +393,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=10
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=100
-	// // +kubebuilder:validation:Required
-	GnssDutyLockTP1 int `json:"gnssDutyLockTP1"`
+	// +kubebuilder:validation:Required
+	GnssDutyLockTP1 int `json:"gnssDutyLockTP1,omitempty"`
 
 	//
 	// Enable/disable the second Time Pulse (10 MHz)
@@ -407,8 +407,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssTP2En int `json:"gnssTP2En"`
+	// +kubebuilder:validation:Required
+	GnssTP2En int `json:"gnssTP2En,omitempty"`
 
 	//
 	// Set Time Pulse Frequency (Hz) for the second Time Pulse
@@ -417,8 +417,8 @@ type StsGnssSpec struct {
 	//     10000000 - (default)
 	//
 	// +kubebuilder:default:=10000000
-	// // +kubebuilder:validation:Required
-	GnssFreqTP2 int `json:"gnssFreqTP2"`
+	// +kubebuilder:validation:Required
+	GnssFreqTP2 int `json:"gnssFreqTP2,omitempty"`
 
 	//
 	// Set Time pulse Frequency (Hz), when locked to GNSS time, for the second Time Pulse
@@ -427,8 +427,8 @@ type StsGnssSpec struct {
 	//     10000000 - (default)
 	//
 	// +kubebuilder:default:=10000000
-	// // +kubebuilder:validation:Required
-	GnssFreqLockTP2 int `json:"gnssFreqLockTP2"`
+	// +kubebuilder:validation:Required
+	GnssFreqLockTP2 int `json:"gnssFreqLockTP2,omitempty"`
 
 	//
 	// Use locked parameters, when possible, for the second Time Pulse
@@ -441,8 +441,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// // +kubebuilder:validation:Required
-	GnssUseLockTP2 int `json:"gnssUseLockTP2"`
+	// +kubebuilder:validation:Required
+	GnssUseLockTP2 int `json:"gnssUseLockTP2,omitempty"`
 
 	//
 	// Set Time Pulse Duty Cycle (%) for the second Time Pulse
@@ -453,8 +453,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=100
-	// // +kubebuilder:validation:Required
-	GnssDutyTP2 int `json:"gnssDutyTP2"`
+	// +kubebuilder:validation:Required
+	GnssDutyTP2 int `json:"gnssDutyTP2,omitempty"`
 
 	//
 	// Set Time Pulse Duty Cycle (%), when locked to GNSS time, for the second Time Pulse
@@ -465,8 +465,8 @@ type StsGnssSpec struct {
 	// +kubebuilder:default:=50
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=100
-	// // +kubebuilder:validation:Required
-	GnssDutyLockTP2 int `json:"gnssDutyLockTP2"`
+	// +kubebuilder:validation:Required
+	GnssDutyLockTP2 int `json:"gnssDutyLockTP2,omitempty"`
 
 	//
 	// ********************** CFG-NAVSPG- Standard Precision Navigation Configuration ******************
@@ -478,8 +478,7 @@ type StsGnssSpec struct {
 	//
 	//     N - degrees
 	//
-	// +kubebuilder:validation:Required
-	GnssMinElev int `json:"gnssMinElev"`
+	GnssMinElev int `json:"gnssMinElev,omitempty"`
 
 	//
 	// Minimum satellite signal level for navigation (	Hz)
@@ -487,8 +486,7 @@ type StsGnssSpec struct {
 	//
 	//     N - dBHz
 	//
-	// +kubebuilder:validation:Required
-	GnssMinSatSig int `json:"gnssMinSatSig"`
+	GnssMinSatSig int `json:"gnssMinSatSig,omitempty"`
 
 	//
 	// ************** CFG-INFMSG- Information Message Configuration **************
@@ -512,7 +510,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=31
 	// +kubebuilder:validation:Required
-	GnssMsgNmeaUsb int `json:"gnssMsgNmeaUsb"`
+	GnssMsgNmeaUsb int `json:"gnssMsgNmeaUsb,omitempty"`
 
 	//
 	// Information Message Flags for UBX Protocol on the USB (bitmask)
@@ -532,7 +530,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=31
 	// +kubebuilder:validation:Required
-	GnssMsgUbxUsb int `json:"gnssMsgUbxUsb"`
+	GnssMsgUbxUsb int `json:"gnssMsgUbxUsb,omitempty"`
 
 	//
 	// *********************** CFG-ITFM- Jamming/Interference Monitor Configuration ********************
@@ -550,7 +548,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
-	GnssIntfDetect int `json:"gnssIntfDetect"`
+	GnssIntfDetect int `json:"gnssIntfDetect,omitempty"`
 
 	//
 	// Antenna setting
@@ -566,7 +564,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=2
 	// +kubebuilder:validation:Required
-	GnssAntSet int `json:"gnssAntSet"`
+	GnssAntSet int `json:"gnssAntSet,omitempty"`
 
 	//
 	// GNSS CW Jamming Detection Threshold (dB)
@@ -577,7 +575,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=255
 	// +kubebuilder:validation:Required
-	GnssCwTh int `json:"gnssCwTh"`
+	GnssCwTh int `json:"gnssCwTh,omitempty"`
 
 	//
 	// **************************** CFG-TMODE- Survey-in Time Mode Configuration ***********************
@@ -597,7 +595,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=2
 	// +kubebuilder:validation:Required
-	GnssRecvTMode int `json:"gnssRecvTMode"`
+	GnssRecvTMode int `json:"gnssRecvTMode,omitempty"`
 
 	//
 	// Survey-in Minimum Duration (sec)
@@ -607,7 +605,7 @@ type StsGnssSpec struct {
 	//
 	// +kubebuilder:default:=120
 	// +kubebuilder:validation:Required
-	GnssSvinMinDur int `json:"gnssSvinMinDur"`
+	GnssSvinMinDur int `json:"gnssSvinMinDur,omitempty"`
 
 	//
 	// Survey-in Position Accuracy Limit (mm)
@@ -617,7 +615,7 @@ type StsGnssSpec struct {
 	//
 	// +kubebuilder:default:=100000
 	// +kubebuilder:validation:Required
-	GnssSvinAccLimit int `json:"gnssSvinAccLimit"`
+	GnssSvinAccLimit int `json:"gnssSvinAccLimit,omitempty"`
 
 	//
 	// **************************** GNSS Clock Out Configuration ***********************
@@ -635,7 +633,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
-	GnssLockMode int `json:"gnssLockMode"`
+	GnssLockMode int `json:"gnssLockMode,omitempty"`
 
 	//
 	// GNSS Lock Threshold (nsec)
@@ -647,7 +645,7 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=10000
 	// +kubebuilder:validation:Required
-	GnssLockTh int `json:"gnssLockTh"`
+	GnssLockTh int `json:"gnssLockTh,omitempty"`
 
 	//
 	// Enable/disable the Clock Out
@@ -661,17 +659,23 @@ type StsGnssSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
-	GnssClockOutEn int `json:"gnssClockOutEn"`
+	GnssClockOutEn int `json:"gnssClockOutEn,omitempty"`
 }
 
 // StsConfigSpec defines the desired state of StsConfig
 type StsConfigSpec struct {
+
+	// +kubebuilder:validation:Required
 	Interfaces   []StsInterfaceSpec `json:"interfaces"`
 	NodeSelector map[string]string  `json:"nodeSelector,omitempty"`
-	GnssSpec     StsGnssSpec        `json:"gnssSpec,omitempty"`
+
+	// +kubebuilder:default={"gnssSigGpsEn":1}
+	// +kubebuilder:validation:Required
+	GnssSpec StsGnssSpec `json:"gnssSpec,omitempty"`
 
 	// +kubebuilder:validation:Enum=T-GM.8275.1;T-BC-8275.1;T-TSC.8275.1;T-GM.8275.2;T-BC-P-8275.2;
 	// +kubebuilder:default:="T-GM.8275.1"
+	// +kubebuilder:validation:Required
 	//Telecom G8275 Profile
 	//
 	// T-BC-8275.1
@@ -692,19 +696,18 @@ type StsConfigSpec struct {
 	// +kubebuilder:default:=2
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=2
-	// +kubebuilder:validation:Required
 	//Set 1PPS Connector Mode
 	//
 	//1 - PPS IN
 	//
 	//2 - PPS OUT (default)
 	//
+	// +kubebuilder:validation:Required
 	ModePPS int `json:"modePPS,omitempty"`
 
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=3
-	// +kubebuilder:validation:Required
 	// Set PPS OUT Source
 	//
 	// 1 - PLL (default)
@@ -712,12 +715,12 @@ type StsConfigSpec struct {
 	// 2 - GPS
 	//
 	// 3 - IN
+	// +kubebuilder:validation:Required
 	SrcPPS int `json:"srcPPS,omitempty"`
 
 	// +kubebuilder:default:=2
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=3
-	// +kubebuilder:validation:Required
 	// Set 10MHz Connector Mode
 	//
 	// 1 - 10MHz IN
@@ -725,12 +728,12 @@ type StsConfigSpec struct {
 	// 2 - 10MHz OUT (default)
 	//
 	// 3 - PPS OUT
+	// +kubebuilder:validation:Required
 	Mode10MHz int `json:"mode10MHz,omitempty"`
 
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=3
-	// +kubebuilder:validation:Required
 	// Set 10MHz OUT Source
 	//
 	// 1 - PLL (default)
@@ -738,24 +741,25 @@ type StsConfigSpec struct {
 	// 2 - GPS
 	//
 	// 3 - IN
+	// +kubebuilder:validation:Required
 	Src10MHz int `json:"src10MHz,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=7
-	// +kubebuilder:validation:Required
 	// Set SyncE Recovery Clock Port
+	// +kubebuilder:validation:Required
 	SynceRecClkPort int `json:"synceRecClkPort,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	//Enable/disable Phy Leds Control Switch
 	//
 	//0 - disable Phy Leds Control Switch (default)
 	//
 	//1 - enable Phy Leds Control Switch
+	// +kubebuilder:validation:Required
 	PhyLedsCtl int `json:"phyLedsCtl,omitempty"`
 
 	//
@@ -786,22 +790,22 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Required
 	TaccLogEn int `json:"taccLogEn,omitempty"`
 
-	// +kubebuilder:default:=1
-	// +kubebuilder:validation:Minimum=1
-	// +kubebuilder:validation:Maximum=2
-	// +kubebuilder:validation:Required
 	// Configures the synchronization network
 	//
 	//1 - Option 1 refers to synchronization networks designed for Europe
 	//
 	//2 - Option 2 refers to synchronization networks designed for United States
+	// +kubebuilder:default:=1
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=2
+	// +kubebuilder:validation:Required
 	SyncOption int `json:"syncOption,omitempty"`
 
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=10
-	// +kubebuilder:validation:Required
 	// Set CPU Pin for SyncE ESMC thread (cpu affinity on each node)
+	// +kubebuilder:validation:Required
 	StsCpu int `json:"stsCpu,omitempty"`
 
 	//
@@ -816,7 +820,7 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
-	PhaseOfstEn_GM int `json:"phaseOfstEn_GM"`
+	PhaseOfstEn_GM int `json:"phaseOfstEn_GM,omitempty"`
 
 	//
 	// Set Frame Phase Offset Value for GM
@@ -828,23 +832,22 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Minimum=1947460
 	// +kubebuilder:validation:Maximum=1950460
 	// +kubebuilder:validation:Required
-	PhaseOfstVal_GM int `json:"phaseOfstVal_GM"`
+	PhaseOfstVal_GM int `json:"phaseOfstVal_GM,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	//Enable/disable two-step PTP Clock
 	//
 	//0 - Disable two-step clock, (set one-step clock) (default)
 	//
 	//1 - Enable two-step clock
+	// +kubebuilder:validation:Required
 	TwoStep int `json:"twoStep,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	//Configures the Squelch Mode
 	//
 	//0 - Sending Sync packet in GM and BC modes while in Freerun (default)
@@ -852,30 +855,26 @@ type StsConfigSpec struct {
 	//1 - Not sending Sync packet in GM and BC modes while in Freerun
 	FreerunSQ int `json:"freerunSQ,omitempty"`
 
+	//Set Priority 2 for GM PTP Clock
+	//
+	// Valid range 0-255, smaller values indicate higher priority
 	// +kubebuilder:default:=128
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=255
 	// +kubebuilder:validation:Required
-	//Set Priority 2 for GM PTP Clock
-	//
-	// Valid range 0-255, smaller values indicate higher priority
 	Priority2 int `json:"priority2,omitempty"`
 
-	// +kubebuilder:default:=1
-	// +kubebuilder:validation:Minimum=0
-	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	//Forwardable/Non-Forwardable Multicast Address
 	//
 	//0 - Non-Forwardable
 	//
 	//1 - Forwardable (default)
+	// +kubebuilder:default:=1
+	// +kubebuilder:validation:Minimum=0
+	// +kubebuilder:validation:Maximum=1
+	// +kubebuilder:validation:Required
 	Forwardable int `json:"forwardable,omitempty"`
 
-	// +kubebuilder:default:=-1
-	// +kubebuilder:validation:Minimum=-1
-	// +kubebuilder:validation:Maximum=10
-	// +kubebuilder:validation:Required
 	//Trace PTP Message
 	//
 	//Valid range -1-10
@@ -903,12 +902,15 @@ type StsConfigSpec struct {
 	//9 - Enable Trace for SIGNAL Messages
 	//
 	//10 - Enable Trace for MANAGEMENT Messages
+	// +kubebuilder:default:=-1
+	// +kubebuilder:validation:Minimum=-1
+	// +kubebuilder:validation:Maximum=10
+	// +kubebuilder:validation:Required
 	TracePtpMsg int `json:"tracePtpMsg,omitempty"`
 
 	// +kubebuilder:default:=23
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=36
-	// +kubebuilder:validation:Required
 	//Trace module
 	//
 	//Valid range 0-36
@@ -986,6 +988,7 @@ type StsConfigSpec struct {
 	//35 - HO Utils
 	//
 	//36 - TSA
+	// +kubebuilder:validation:Required
 	TraceModule int `json:"traceModule,omitempty"`
 
 	// +kubebuilder:default:=0
@@ -997,23 +1000,23 @@ type StsConfigSpec struct {
 	// +kubebuilder:default:=2
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=2
-	// +kubebuilder:validation:Required
 	//Configures the ESMC Mode
 	//
 	//1 - Manual
 	//
 	//2 - Auto (default)
+	// +kubebuilder:validation:Required
 	EsmcMode int `json:"esmcMode,omitempty"`
 
 	// +kubebuilder:default:=1
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=2
-	// +kubebuilder:validation:Required
 	//Configures the SSM Mode
 	//
 	//1 - SSM Code (default)
 	//
 	//2 - ESSM Code
+	// +kubebuilder:validation:Required
 	SsmMode int `json:"ssmMode,omitempty"`
 
 	// +kubebuilder:default:=0
@@ -1052,27 +1055,27 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Minimum=24
 	// +kubebuilder:validation:Maximum=43
 	// +kubebuilder:validation:Required
-	DomainNum_8275_1 int `json:"domainNum_8275_1"`
+	DomainNum_8275_1 int `json:"domainNum_8275_1,omitempty"`
 
 	// +kubebuilder:default:=44
 	// +kubebuilder:validation:Minimum=44
 	// +kubebuilder:validation:Maximum=63
 	// +kubebuilder:validation:Required
-	DomainNum_8275_2 int `json:"domainNum_8275_2"`
+	DomainNum_8275_2 int `json:"domainNum_8275_2,omitempty"`
 
 	// +kubebuilder:default:=4
 	// +kubebuilder:validation:Minimum=4
 	// +kubebuilder:validation:Maximum=23
 	// +kubebuilder:validation:Required
-	DomainNum_8265_2 int `json:"domainNum_8265_2"`
+	DomainNum_8265_2 int `json:"domainNum_8265_2,omitempty"`
 
 	// +kubebuilder:default:=128
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=255
-	// +kubebuilder:validation:Required
 	//Set Clock Local Priority for BC/TSC PTP profiles
 	//Valid range 1-255, smaller values indicate higher priority
-	LocalClockPriority int `json:"localClockPriority"`
+	// +kubebuilder:validation:Required
+	LocalClockPriority int `json:"localClockPriority,omitempty"`
 
 	// +kubebuilder:default:="0,192.168.1.1,,,"
 	// Unicast master table
@@ -1089,50 +1092,44 @@ type StsConfigSpec struct {
 	//  unicastMaster = 0,192.168.1.100
 	//  unicastMaster = 0,192.168.1.101,,0,0
 	//  unicastMaster = 1,fe80::211:22ff:fe33:4455,0,-1,-1
-	UnicastMaster string `json:"unicastMaster"`
+	// +kubebuilder:validation:Required
+	UnicastMaster string `json:"unicastMaster,omitempty"`
 }
 
 type StsInterfaceSpec struct {
 	EthName string `json:"ethName"`
 
 	// +kubebuilder:validation:Minimum=1
-	// +kubebuilder:validation:Required
 	// This is 1 based
 	EthPort int `json:"ethPort"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	SyncE int `json:"synce,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	Ipv6 int `json:"ipv6,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	Ipv4 int `json:"ipv4,omitempty"`
 
 	// +kubebuilder:default:=500
 	// +kubebuilder:validation:Minimum=300
 	// +kubebuilder:validation:Maximum=1800
-	// +kubebuilder:validation:Required
 	HoldOff int `json:"holdoff,omitempty"`
 
 	// +kubebuilder:validation:Enum=Master;Slave
 	// +kubebuilder:default:=Master
-	// +kubebuilder:validation:Required
 	Mode string `json:"mode,omitempty"`
 
 	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
-	// +kubebuilder:validation:Required
 	// Configures QL enable for the interface
 	// 0 - Disable QL
 	// 1 - Enable QL (default)
@@ -1141,7 +1138,6 @@ type StsInterfaceSpec struct {
 	// +kubebuilder:default:=4
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=7
-	// +kubebuilder:validation:Required
 	//Configures QL value for the interface
 	//
 	//if syncOption is 1 (Europe)
@@ -1172,7 +1168,6 @@ type StsInterfaceSpec struct {
 	// +kubebuilder:default:=10000
 	// +kubebuilder:validation:Minimum=10000
 	// +kubebuilder:validation:Maximum=25000
-	// +kubebuilder:validation:Required
 	//
 	//
 	PortSpeed int `json:"portSpeed,omitempty"`
@@ -1180,7 +1175,6 @@ type StsInterfaceSpec struct {
 	// +kubebuilder:default:=128
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=255
-	// +kubebuilder:validation:Required
 	//
 	//Set Port Local Priorities for BC/TSC PTP profiles
 	//Valid range 1-255, smaller values indicate higher priority
@@ -1200,6 +1194,7 @@ type StsConfigStatus struct {
 type StsConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+
 	// +kubebuilder:validation:Required
 	Spec   StsConfigSpec   `json:"spec,omitempty"`
 	Status StsConfigStatus `json:"status,omitempty"`

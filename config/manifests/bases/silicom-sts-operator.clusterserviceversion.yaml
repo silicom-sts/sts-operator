@@ -18,7 +18,7 @@ metadata:
   labels:
     operatorframework.io/arch.amd64: supported
     operatorframework.io/os.linux: supported
-  name: silicom-sts-operator.v0.1.0
+  name: silicom-sts-operator.v0.1.1
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -92,8 +92,8 @@ spec:
   provider:
     name: Silicom Ltd.
     url: http://www.silicom-usa.com
-  replaces: silicom-sts-operator.v0.0.7
+  replaces: silicom-sts-operator.v0.1.0
   skips:
   - silicom-sts-operator.v0.0.8
   - silicom-sts-operator.v0.0.9
-  version: 0.1.0
+  version: 0.1.1
