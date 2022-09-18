@@ -1,0 +1,8 @@
+All notable changes to this project will be documented in this file.
+
+## [0.1.1] - 2022-09-18
+### Added
+- Fixed default gnss values for cr in api
+- Added freerunSQ, unicastMaster, taccLogEn, eventMask, phaseOfstVal_GM, phaseOfstEn_GM, gpsdDbgLevel
+- Use StsCpu correctly
+- 
