@@ -2,32 +2,17 @@ apiVersion: sts.silicom.com/v1alpha1
 kind: StsConfig
 metadata:
   name: bc-1
-spec:
   namespace: openshift-operators
+spec:
   nodeSelector:
     sts.silicom.com/config: "bc-1"
-  mode: T-TBC.8275.1
-  domainNumber: 24
-  modePPS: 2 # OUT
-  srcPPS: 1 # PLL
-  mode10MHz: 2 # 10MHz OUT
-  src10MHz: 1 # PLL
-  synceRecClkPort: 0
-  phyLedsCtl: 0 #off
-  syncOption: 1 #Europe
-  synceCpu: 10
-  twoStep: 0 #disable
-  priority2: 128 # smaller values indicate higher priority
-  forwardable: 0 #non forwardable
-  tracePtpMsg: -1
-  esmcMode: 1 #ssm code
-  aprLevel: 0
+  mode: T-BC-8275.1
   interfaces:
     - ethName: enp2s0f0
       synce: 1
       holdoff: 500
       mode: Slave
-      ethPort: 0
+      ethPort: 1
       ql: 4
       qlEnable: 1
       ipv4: 1

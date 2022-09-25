@@ -19,3 +19,10 @@ Cleanup controller-manager because it does not need root access or GPS port info
 Do we need gps services exposed?
 
 Expand the kind test to include SRO
+
+When deleting the stsconfig, it should just allow it, caused by no nodes available at the time.
+    "StsConfig.sts.silicom.com \"bc-1\" not found"
+
+CRs outside operator ns openshift-operators don't really work.
+
+serviceaccounts;namespaces aren't created by controller-manager anymore, cleanup security.

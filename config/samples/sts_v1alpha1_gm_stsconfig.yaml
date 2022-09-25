@@ -2,9 +2,10 @@ apiVersion: sts.silicom.com/v1alpha1
 kind: StsConfig
 metadata:
   name: gm-1
+  namespace: openshift-operators
 spec:
   nodeSelector:
-    sts.silicom.com/config: "gm-1"
+    sts.silicom.com/mode: "gm-1"
   mode: T-GM.8275.1
   interfaces:
     - ethName: enp2s0f0
