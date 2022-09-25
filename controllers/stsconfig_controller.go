@@ -72,6 +72,7 @@ type StsConfigTemplate struct {
 	Ipv6PortMask      int
 	Ipv4PortMask      int
 	ProfileId         int
+	Ports             []int
 }
 
 func (r *StsConfigReconciler) interfacesToBitmask(cfg *StsConfigTemplate, interfaces []stsv1alpha1.StsInterfaceSpec) {
@@ -81,6 +82,7 @@ func (r *StsConfigReconciler) interfacesToBitmask(cfg *StsConfigTemplate, interf
 	cfg.SyncePortMask = 0
 	cfg.Ipv4PortMask = 0
 	cfg.Ipv6PortMask = 0
+	cfg.Ports = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
 
 	for _, x := range interfaces {
 		if x.SyncE == 1 {

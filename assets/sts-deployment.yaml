@@ -11,24 +11,47 @@ data:
     port{{$dev.EthPort}} = {{$dev.EthName}}
     ql{{$dev.EthPort}} = {{$dev.Ql}}
     portSpeed{{$dev.EthPort}} = {{$dev.PortSpeed}}
+    localPortPriority{{$dev.EthPort}} = {{$dev.LocalPortPriority}}
 {{end}}
+
+{{$length := len .StsConfig.Spec.Interfaces}}
+{{- range $i := .Ports}}
+{{- if $length | gt $i }}
+    port{{$i}} = eth{{$i}}
+    ql{{$i}} = 4
+    localPortPriority{{$i}} = 128
+{{- if 9 | lt $i }}
+    portSpeed{{$i}} = 10000
+{{else}}
+    portSpeed{{$i}} = 25000
+{{end}}{{end}}{{end}}
 
     synceHoldOff = {{.StsConfig.Spec.SynceHoldOff}}
 
 {{- if or (eq .ProfileId 2) (eq .ProfileId 5) }}
     masterPortMask_GM = {{printf "0x%x" .MasterPortMask}}
     syncePortMask_GM = {{printf "0x%x" .SyncePortMask}}
+{{else}}
+    masterPortMask_GM = 0xfff
+    syncePortMask_GM = 0xfff
 {{end}}
 
 {{- if or (eq .ProfileId 3) (eq .ProfileId 6) (eq .ProfileId 8) }}
     masterPortMask_BC = {{printf "0x%x" .MasterPortMask}}
     slavePortMask_BC = {{printf "0x%x" .SlavePortMask}}
     syncePortMask_BC = {{printf "0x%x" .SyncePortMask}}
+{{else}}
+    masterPortMask_BC = 0xfff
+    slavePortMask_BC = 0xfff
+    syncePortMask_BC = 0xfff
 {{end}}
 
 {{- if or (eq .ProfileId 4) (eq .ProfileId 7) (eq .ProfileId 9) }}
     slavePortMask_TSC = {{printf "0x%x" .SlavePortMask}}
     syncePortMask_TSC = {{printf "0x%x" .SyncePortMask}}
+{{else}}
+    slavePortMask_TSC = 0xfff
+    syncePortMask_TSC = 0xfff
 {{end}}
 
     phyLedsCtl = {{.StsConfig.Spec.PhyLedsCtl}}
@@ -50,6 +73,9 @@ data:
     synceRecClkPort = {{.StsConfig.Spec.SynceRecClkPort}}
     syncOption = {{.StsConfig.Spec.SyncOption}}
     taccLogEn = {{.StsConfig.Spec.TaccLogEn}}
+    freqCat = {{.StsConfig.Spec.FreqCat}}
+    hoSpecDuration = {{.StsConfig.Spec.HoSpecDuration}}
+    synceRecClkMode = {{.StsConfig.Spec.SynceRecClkMode}}
     eventMask = {{.StsConfig.Spec.EventMask}}
     stsCpu =  {{.StsConfig.Spec.StsCpu}}
     phaseOfstEn_GM = {{.StsConfig.Spec.PhaseOfstEn_GM}}
@@ -57,6 +83,8 @@ data:
     localClockPriority = {{.StsConfig.Spec.LocalClockPriority}}
 {{- if or (eq .ProfileId 5) (eq .ProfileId 6) (eq .ProfileId 7) (eq .ProfileId 8) (eq .ProfileId 9) }}
     ipv6PortMask = {{printf "0x%x" .Ipv6PortMask}}
+{{else}}
+    ipv6PortMask = 0x000
 {{end}}
     swTimestamp = 0
     inbandMode = 1 

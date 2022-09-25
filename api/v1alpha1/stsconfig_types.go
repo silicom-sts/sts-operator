@@ -89,7 +89,7 @@ type StsGnssSpec struct {
 	//
 	//     1 - Enable SBAS L1C/A
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
@@ -215,7 +215,7 @@ type StsGnssSpec struct {
 	//
 	//     1 - Enable QZSS L1S
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
@@ -287,6 +287,7 @@ type StsGnssSpec struct {
 	//
 	//     N - nanoseconds
 	//
+	// +kubebuilder:validation:Minimum=50
 	// +kubebuilder:validation:Minimum=-50000000
 	// +kubebuilder:validation:Maximum=50000000
 	// +kubebuilder:validation:Required
@@ -314,7 +315,7 @@ type StsGnssSpec struct {
 	//
 	//     1 - Length
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
@@ -378,7 +379,7 @@ type StsGnssSpec struct {
 	//
 	//     0 - (default)
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=1
 	// +kubebuilder:validation:Required
@@ -478,6 +479,8 @@ type StsGnssSpec struct {
 	//
 	//     N - degrees
 	//
+	// +kubebuilder:default:=5
+	// +kubebuilder:validation:Required
 	GnssMinElev int `json:"gnssMinElev,omitempty"`
 
 	//
@@ -486,6 +489,8 @@ type StsGnssSpec struct {
 	//
 	//     N - dBHz
 	//
+	// +kubebuilder:default:=9
+	// +kubebuilder:validation:Required
 	GnssMinSatSig int `json:"gnssMinSatSig,omitempty"`
 
 	//
@@ -506,7 +511,7 @@ type StsGnssSpec struct {
 	//
 	//     Bit 4 - Enable/Disable (default) Debug Information Messages
 	//
-	// +kubebuilder:default:=31
+	// +kubebuilder:default:=7
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=31
 	// +kubebuilder:validation:Required
@@ -526,7 +531,7 @@ type StsGnssSpec struct {
 	//
 	//     Bit 4 - Enable/Disable (default) Debug Information Messages
 	//
-	// +kubebuilder:default:=31
+	// +kubebuilder:default:=0
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=31
 	// +kubebuilder:validation:Required
@@ -560,7 +565,7 @@ type StsGnssSpec struct {
 	//
 	//     2 - Active
 	//
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=2
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=2
 	// +kubebuilder:validation:Required
@@ -790,6 +795,41 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Required
 	TaccLogEn int `json:"taccLogEn,omitempty"`
 
+	//
+	// Set Holdover Quality Categories
+	// Valid range 1-3
+	//
+	//1 - FREQ_CAT1 (default)
+	//
+	//2 - FREQ_CAT2
+	//
+	//3 - FREQ_CAT3
+	//
+	// +kubebuilder:default:=1
+	// +kubebuilder:validation:Required
+	FreqCat int `json:"freqCat,omitempty"`
+
+	//
+	// Set time within Holdover Specification
+	// Valid range 0-43200 secs (12 hours)
+	//
+	//     14400 - (default)
+	//
+	// +kubebuilder:default:=14400
+	// +kubebuilder:validation:Required
+	HoSpecDuration int `json:"hoSpecDuration,omitempty"`
+
+	//
+	// Set SyncE Recovery Clock Mode (applicable for STS2 and STS4 Cards)
+	//
+	//1 - Manual
+	//
+	//2 - Auto (default)
+	//
+	// +kubebuilder:default:=2
+	// +kubebuilder:validation:Required
+	SynceRecClkMode int `json:"synceRecClkMode,omitempty"`
+
 	// Configures the synchronization network
 	//
 	//1 - Option 1 refers to synchronization networks designed for Europe
@@ -801,7 +841,7 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Required
 	SyncOption int `json:"syncOption,omitempty"`
 
-	// +kubebuilder:default:=1
+	// +kubebuilder:default:=4
 	// +kubebuilder:validation:Minimum=0
 	// +kubebuilder:validation:Maximum=10
 	// Set CPU Pin for SyncE ESMC thread (cpu affinity on each node)

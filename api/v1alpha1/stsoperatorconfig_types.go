@@ -28,7 +28,7 @@ import (
 type StsOperatorConfigSpec struct {
 
 	// +kubebuilder:validation:Required
-	// +kubebuilder:default={"tsyncd":"quay.io/silicom/tsyncd:2.1.2.8"}
+	// +kubebuilder:default={"tsyncd":"quay.io/silicom/tsyncd:2.1.2.9"}
 	Images StsImages `json:"images,omitempty"`
 
 	// +kubebuilder:validation:Required
@@ -67,15 +67,15 @@ type SroCfg struct {
 
 type StsImages struct {
 
-	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.8"
+	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.9"
 	// +kubebuilder:validation:Required
 	Tsyncd string `json:"tsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.8"
+	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.9"
 	// +kubebuilder:validation:Required
 	GrpcTsyncd string `json:"grpcTsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.1.1"
+	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.1.2"
 	// +kubebuilder:validation:Required
 	StsPlugin string `json:"stsPlugin,omitempty"`
 

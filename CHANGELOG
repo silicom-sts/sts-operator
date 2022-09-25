@@ -1,5 +1,11 @@
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2022-09-25
+### Added
+- Change default tsync version to 2.1.2.9
+- Unused eth interfaces set to default values
+- Update several default values
+
 ## [0.1.1] - 2022-09-18
 ### Added
 - Fixed default gnss values for cr in api

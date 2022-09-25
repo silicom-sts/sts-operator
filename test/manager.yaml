@@ -19,7 +19,7 @@ spec:
         - /manager
         args:
         - --leader-elect
-        image: quay.io/silicom/sts-operator:0.1.1
+        image: quay.io/silicom/sts-operator:0.1.2
         imagePullPolicy: Always
         name: manager
         env:
