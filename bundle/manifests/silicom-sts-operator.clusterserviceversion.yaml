@@ -26,7 +26,7 @@ metadata:
               },
               {
                 "ethName": "enp2s0f1",
-                "ethPort": 1,
+                "ethPort": 2,
                 "holdoff": 500,
                 "ipv4": 1,
                 "ipv6": 1,
@@ -37,7 +37,7 @@ metadata:
               },
               {
                 "ethName": "enp2s0f2",
-                "ethPort": 2,
+                "ethPort": 3,
                 "holdoff": 500,
                 "ipv4": 1,
                 "mode": "Master",
@@ -75,7 +75,7 @@ metadata:
             ],
             "mode": "T-GM.8275.1",
             "nodeSelector": {
-              "sts.silicom.com/config": "gm-1"
+              "sts.silicom.com/mode": "gm-1"
             }
           }
         },
@@ -178,7 +178,7 @@ metadata:
   labels:
     operatorframework.io/arch.amd64: supported
     operatorframework.io/os.linux: supported
-  name: silicom-sts-operator.v0.1.2
+  name: silicom-sts-operator.v0.1.3
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -450,7 +450,7 @@ spec:
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.namespace
-                image: quay.io/silicom/sts-operator:0.1.2
+                image: quay.io/silicom/sts-operator:0.1.3
                 imagePullPolicy: Always
                 livenessProbe:
                   httpGet:
@@ -586,11 +586,11 @@ spec:
   provider:
     name: Silicom Ltd.
     url: http://www.silicom-usa.com
-  replaces: silicom-sts-operator.v0.1.1
+  replaces: silicom-sts-operator.v0.1.2
   skips:
   - silicom-sts-operator.v0.0.8
   - silicom-sts-operator.v0.0.9
-  version: 0.1.2
+  version: 0.1.3
   relatedImages:
   - image: quay.io/silicom/gpsd@sha256:cc1066f0ab347fd11c2214d6633b9727f581830bcc6b638df51e5657a5408c07
     name: gpsd
@@ -600,11 +600,11 @@ spec:
     name: tsyncd
   - image: quay.io/silicom/grpc-tsyncd@sha256:7ddf9e3ba749f6ec8ded7c4a2d41d94008eb64f69e38f14a01e082f780b08994
     name: grpc-tsyncd
-  - image: quay.io/silicom/sts-plugin@sha256:529cd89559276680efcd73ef4e8d19df5741726dcfb02ad17a1c9f264d378fe0
+  - image: quay.io/silicom/sts-plugin@sha256:5212af26db41eb7061c3264f9c786675f3fac39a605a361ecd25f005aabdeb0a
     name: sts-plugin
   - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:26d352120fc86e5b67610ecd56ac383f07f093d8606e26f913acad7dbe11a8de
+  - image: quay.io/silicom/sts-operator@sha256:35b51c872b15acc458a1eac54c112da24e26670af186f62440888e60a37a2760
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy

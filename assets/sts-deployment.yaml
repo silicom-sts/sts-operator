@@ -14,45 +14,16 @@ data:
     localPortPriority{{$dev.EthPort}} = {{$dev.LocalPortPriority}}
 {{end}}
 
-{{$length := len .StsConfig.Spec.Interfaces}}
-{{- range $i := .Ports}}
-{{- if $length | gt $i }}
-    port{{$i}} = eth{{$i}}
-    ql{{$i}} = 4
-    localPortPriority{{$i}} = 128
-{{- if 9 | lt $i }}
-    portSpeed{{$i}} = 10000
-{{else}}
-    portSpeed{{$i}} = 25000
-{{end}}{{end}}{{end}}
-
     synceHoldOff = {{.StsConfig.Spec.SynceHoldOff}}
 
-{{- if or (eq .ProfileId 2) (eq .ProfileId 5) }}
-    masterPortMask_GM = {{printf "0x%x" .MasterPortMask}}
-    syncePortMask_GM = {{printf "0x%x" .SyncePortMask}}
-{{else}}
-    masterPortMask_GM = 0xfff
-    syncePortMask_GM = 0xfff
-{{end}}
-
-{{- if or (eq .ProfileId 3) (eq .ProfileId 6) (eq .ProfileId 8) }}
-    masterPortMask_BC = {{printf "0x%x" .MasterPortMask}}
-    slavePortMask_BC = {{printf "0x%x" .SlavePortMask}}
-    syncePortMask_BC = {{printf "0x%x" .SyncePortMask}}
-{{else}}
-    masterPortMask_BC = 0xfff
-    slavePortMask_BC = 0xfff
-    syncePortMask_BC = 0xfff
-{{end}}
-
-{{- if or (eq .ProfileId 4) (eq .ProfileId 7) (eq .ProfileId 9) }}
-    slavePortMask_TSC = {{printf "0x%x" .SlavePortMask}}
-    syncePortMask_TSC = {{printf "0x%x" .SyncePortMask}}
-{{else}}
-    slavePortMask_TSC = 0xfff
-    syncePortMask_TSC = 0xfff
-{{end}}
+    masterPortMask_GM = {{printf "0x%x" .MasterPortMask_GM}}
+    syncePortMask_GM = {{printf "0x%x" .SyncePortMask_GM}}
+    masterPortMask_BC = {{printf "0x%x" .MasterPortMask_BC}}
+    slavePortMask_BC = {{printf "0x%x" .SlavePortMask_BC}}
+    syncePortMask_BC = {{printf "0x%x" .SyncePortMask_BC}}
+    slavePortMask_TSC = {{printf "0x%x" .SlavePortMask_TSC}}
+    syncePortMask_TSC = {{printf "0x%x" .SyncePortMask_TSC}}
+    ipv6PortMask = {{printf "0x%x" .Ipv6PortMask}}
 
     phyLedsCtl = {{.StsConfig.Spec.PhyLedsCtl}}
 
@@ -81,11 +52,6 @@ data:
     phaseOfstEn_GM = {{.StsConfig.Spec.PhaseOfstEn_GM}}
     phaseOfstVal_GM = {{.StsConfig.Spec.PhaseOfstVal_GM}}
     localClockPriority = {{.StsConfig.Spec.LocalClockPriority}}
-{{- if or (eq .ProfileId 5) (eq .ProfileId 6) (eq .ProfileId 7) (eq .ProfileId 8) (eq .ProfileId 9) }}
-    ipv6PortMask = {{printf "0x%x" .Ipv6PortMask}}
-{{else}}
-    ipv6PortMask = 0x000
-{{end}}
     swTimestamp = 0
     inbandMode = 1 
     dumpMode = 0
@@ -233,18 +199,18 @@ spec:
       containers:
       - image: {{.StsOperatorConfig.Spec.Images.GrpcTsyncd}}
         imagePullPolicy: Always
-        name: {{.NodeName}}-grpc-tsyncd
+        name: grpc-tsyncd
         ports:
         - containerPort: 50055
-          name: {{.ServicePrefix}}-man
+          name: man
         - containerPort: 50054
-          name: {{.ServicePrefix}}-stat
+          name: stat
         - containerPort: 50053
-          name: {{.ServicePrefix}}-cfg
+          name: cfg
         - containerPort: 50052
-          name: {{.ServicePrefix}}-evt
+          name: evt
         - containerPort: 50051
-          name: {{.ServicePrefix}}-svc
+          name: svc
         volumeMounts:
           - name: devfs
             mountPath: /dev
@@ -255,7 +221,7 @@ spec:
             - CAP_SYS_ADMIN
       - image: {{.StsOperatorConfig.Spec.Images.Tsyncd}}
         imagePullPolicy: Always
-        name: {{.NodeName}}-tsync
+        name: tsync
         env:
           - name: WAIT_FOR_GPS
 {{- if .EnableGPS}}
@@ -286,10 +252,10 @@ spec:
             - CAP_SYS_ADMIN
       - image: {{.StsOperatorConfig.Spec.Images.Gpsd}}
         imagePullPolicy: Always
-        name: {{.NodeName}}-gpsd
+        name: gpsd
         ports:
         - containerPort: 2947
-          name: {{.ServicePrefix}}-gpsd
+          name: gpsd
         env:
           - name: GPS_SVC_PORT
             value: "2947"
@@ -301,7 +267,7 @@ spec:
         securityContext:
           privileged: true
       - image: {{.StsOperatorConfig.Spec.Images.Phc2sys}}
-        name: {{.NodeName}}-phc2sys
+        name: phc2sys
         imagePullPolicy: Always
         network_mode: host
         env:

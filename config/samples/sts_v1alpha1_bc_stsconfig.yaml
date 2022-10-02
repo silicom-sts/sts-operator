@@ -20,7 +20,7 @@ spec:
     - ethName: enp2s0f1
       synce: 1
       holdoff: 500
-      ethPort: 1
+      ethPort: 2
       mode: Master
       ql: 4
       qlEnable: 1
@@ -29,7 +29,7 @@ spec:
     - ethName: enp2s0f2
       synce: 1
       holdoff: 500
-      ethPort: 2
+      ethPort: 3
       mode: Master
       ql: 4
       qlEnable: 1

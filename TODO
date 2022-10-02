@@ -26,3 +26,7 @@ When deleting the stsconfig, it should just allow it, caused by no nodes availab
 CRs outside operator ns openshift-operators don't really work.
 
 serviceaccounts;namespaces aren't created by controller-manager anymore, cleanup security.
+
+Interface ethIndex not checked for overlapping
+
+The configs cannot have a jump in interface ethIndex, because of the need for default values

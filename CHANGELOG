@@ -1,5 +1,11 @@
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2022-10-02
+### Added
+* Removed port numbers exposed on tsync service.
+* Removed uneeded pod prefixes and port name prefixes.
+* Moved golang template logic into golang controller code.
+
 ## [0.1.2] - 2022-09-25
 ### Added
 - Change default tsync version to 2.1.2.9

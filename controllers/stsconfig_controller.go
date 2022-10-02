@@ -66,41 +66,101 @@ type StsConfigTemplate struct {
 	NodeName          string
 	EnableGPS         bool
 	ServicePrefix     string
-	SlavePortMask     int
-	MasterPortMask    int
-	SyncePortMask     int
+	MasterPortMask_GM int
+	SyncePortMask_GM  int
+	MasterPortMask_BC int
+	SlavePortMask_BC  int
+	SyncePortMask_BC  int
+	SlavePortMask_TSC int
+	SyncePortMask_TSC int
 	Ipv6PortMask      int
 	Ipv4PortMask      int
 	ProfileId         int
 	Ports             []int
 }
 
-func (r *StsConfigReconciler) interfacesToBitmask(cfg *StsConfigTemplate, interfaces []stsv1alpha1.StsInterfaceSpec) {
+func (r *StsConfigReconciler) interfacesToBitmask(cfg *StsConfigTemplate, interfaces []stsv1alpha1.StsInterfaceSpec) []stsv1alpha1.StsInterfaceSpec {
 
-	cfg.SlavePortMask = 0
-	cfg.MasterPortMask = 0
-	cfg.SyncePortMask = 0
+	SlavePortMask := 0
+	MasterPortMask := 0
+	SyncePortMask := 0
 	cfg.Ipv4PortMask = 0
-	cfg.Ipv6PortMask = 0
-	cfg.Ports = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+	Ipv6PortMask := 0
 
-	for _, x := range interfaces {
-		if x.SyncE == 1 {
-			cfg.SyncePortMask |= (1 << (x.EthPort - 1))
-		}
-		if x.Ipv6 == 1 {
-			cfg.Ipv6PortMask |= (1 << (x.EthPort - 1))
-		}
-		if x.Ipv4 == 1 {
-			cfg.Ipv4PortMask |= (1 << (x.EthPort - 1))
-		}
+	temp := []stsv1alpha1.StsInterfaceSpec{}
 
-		if x.Mode == "Master" {
-			cfg.MasterPortMask |= (1 << (x.EthPort - 1))
-		} else if x.Mode == "Slave" {
-			cfg.SlavePortMask |= (1 << (x.EthPort - 1))
+	for i := 1; i <= 12; i++ {
+		found := false
+		for _, x := range interfaces {
+			if x.EthPort == i {
+				if x.SyncE == 1 {
+					SyncePortMask |= (1 << (x.EthPort - 1))
+				}
+				if x.Ipv6 == 1 {
+					cfg.Ipv6PortMask |= (1 << (x.EthPort - 1))
+				}
+				if x.Ipv4 == 1 {
+					cfg.Ipv4PortMask |= (1 << (x.EthPort - 1))
+				}
+
+				if x.Mode == "Master" {
+					MasterPortMask |= (1 << (x.EthPort - 1))
+				} else if x.Mode == "Slave" {
+					SlavePortMask |= (1 << (x.EthPort - 1))
+				}
+				found = true
+				break
+			}
+		}
+		if !found {
+			// Unitialized port
+			p := &stsv1alpha1.StsInterfaceSpec{}
+			p.EthName = fmt.Sprintf("eth%d", i)
+			p.EthPort = i
+			p.Ql = 4
+			p.LocalPortPriority = 128
+			if i > 9 {
+				p.PortSpeed = 25000
+			} else {
+				p.PortSpeed = 10000
+			}
+			temp = append(temp, *p)
 		}
 	}
+
+	if cfg.ProfileId == 2 || cfg.ProfileId == 5 {
+		cfg.MasterPortMask_GM = MasterPortMask
+		cfg.SyncePortMask_GM = SyncePortMask
+	} else {
+		cfg.MasterPortMask_GM = 0xfff
+		cfg.SyncePortMask_GM = 0xfff
+	}
+
+	if cfg.ProfileId == 3 || cfg.ProfileId == 8 {
+		cfg.MasterPortMask_BC = MasterPortMask
+		cfg.SlavePortMask_BC = SlavePortMask
+		cfg.SyncePortMask_BC = SyncePortMask
+
+	} else {
+		cfg.MasterPortMask_BC = 0xfff
+		cfg.SlavePortMask_BC = 0xfff
+		cfg.SyncePortMask_BC = 0xfff
+	}
+
+	if cfg.ProfileId == 4 || cfg.ProfileId == 7 || cfg.ProfileId == 9 {
+		cfg.SyncePortMask_TSC = SyncePortMask
+		cfg.SlavePortMask_TSC = SlavePortMask
+	} else {
+		cfg.SyncePortMask_TSC = 0xfff
+		cfg.SlavePortMask_TSC = 0xfff
+	}
+
+	if cfg.ProfileId == 5 || cfg.ProfileId == 6 || cfg.ProfileId == 7 || cfg.ProfileId == 8 || cfg.ProfileId == 9 {
+		cfg.Ipv6PortMask = Ipv6PortMask
+	} else {
+		cfg.Ipv6PortMask = 0x000
+	}
+	return temp
 }
 
 //
@@ -226,7 +286,8 @@ func (r *StsConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		cfgTemplate.NodeName = node.Name
 		cfgTemplate.ServicePrefix = fmt.Sprintf("%.7sp", node.Name)
 
-		r.interfacesToBitmask(cfgTemplate, stsConfig.Spec.Interfaces)
+		extra := r.interfacesToBitmask(cfgTemplate, stsConfig.Spec.Interfaces)
+		stsConfig.Spec.Interfaces = append(stsConfig.Spec.Interfaces, extra...)
 
 		err = t.Execute(&buff, cfgTemplate)
 		if err != nil {
