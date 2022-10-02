@@ -99,6 +99,7 @@ spec:
                     minimum: 0
                     type: integer
                   gnssCableDelay:
+                    default: 50
                     description: "Antenna cable delay settings (nsec) Valid range
                       +-50,000,000 \n     N - nanoseconds"
                     maximum: 50000000
