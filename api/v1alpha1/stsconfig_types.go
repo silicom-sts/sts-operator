@@ -287,6 +287,7 @@ type StsGnssSpec struct {
 	//
 	//     N - nanoseconds
 	//
+	// +kubebuilder:default=50
 	// +kubebuilder:validation:Minimum=50
 	// +kubebuilder:validation:Minimum=-50000000
 	// +kubebuilder:validation:Maximum=50000000
