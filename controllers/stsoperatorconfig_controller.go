@@ -310,7 +310,7 @@ func (r *StsOperatorConfigReconciler) DeploySro(operatorCfg *stsv1alpha1.StsOper
 }
 
 func (r *StsOperatorConfigReconciler) DeployNfd(operatorCfg *stsv1alpha1.StsOperatorConfig) error {
-	content, err := ioutil.ReadFile("/assets/nfd-discovery.yaml")
+	content, err := ioutil.ReadFile("./assets/nfd-discovery.yaml")
 	if err != nil {
 		r.Log.Error(err, "Loading nfd-discovery.yaml file")
 		return err
