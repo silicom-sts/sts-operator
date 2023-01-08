@@ -14,7 +14,7 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsConfig
-  path: github.com/rmr/sts-operator/api/v1alpha1
+  repo: github.com/silicom-sts/sts-operator
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -23,7 +23,7 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsNode
-  path: github.com/rmr/sts-operator/api/v1alpha1
+    path: github.com/rmr/sts-operator/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -32,6 +32,6 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsOperatorConfig
-  path: github.com/rmr/sts-operator/api/v1alpha1
+    path: github.com/silicom-sts/silicom-sts/api/v1alpha1
   version: v1alpha1
 version: "3"
