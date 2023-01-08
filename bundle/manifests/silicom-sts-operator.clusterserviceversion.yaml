@@ -576,7 +576,7 @@ spec:
   - name: GitHub Repository
     url: https://github.com/silicom-sts/sts-operator
   - name: Github SRO Helm Charts
-    url: https://github.com/silicom-sts/sts2-charts
+    url: https://github.com/rmr/sts2-charts
   - name: Silicom Ltd.
     url: http://www.silicom-usa.com
   maintainers:
