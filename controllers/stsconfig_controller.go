@@ -119,7 +119,7 @@ func (r *StsConfigReconciler) interfacesToBitmask(cfg *StsConfigTemplate, interf
 			p.EthPort = i
 			p.Ql = 4
 			p.LocalPortPriority = 128
-			if i > 9 {
+			if i > 8 {
 				p.PortSpeed = 25000
 			} else {
 				p.PortSpeed = 10000
@@ -239,7 +239,7 @@ func (r *StsConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		return ctrl.Result{RequeueAfter: time.Second * 10}, nil
 	}
 
-	content, err := ioutil.ReadFile("/assets/sts-deployment.yaml")
+	content, err := ioutil.ReadFile("./assets/sts-deployment.yaml")
 	if err != nil {
 		reqLogger.Error(err, "Loading sts-deployment.yaml file")
 		return ctrl.Result{}, err
