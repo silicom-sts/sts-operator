@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	stsv1alpha1 "github.com/rmr/sts-operator/api/v1alpha1"
+	stsv1alpha1 "github.com/silicom-sts/sts-operator/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
