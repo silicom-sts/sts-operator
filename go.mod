@@ -1,4 +1,4 @@
-module github.com/rmr/sts-operator
+module github.com/silicom-sts/sts-operator
 
 go 1.16
 
