@@ -1,8 +1,10 @@
 apiVersion: sts.silicom.com/v1alpha1
 kind: StsNode
 metadata:
-  name: worker2
-spec: {}
+  name: hp-ocp
+  namespase: openshift-operators
+spec:
+    dummy: 0
 status:
   ethInterfaces:
   - ethName: enp2s0f0
