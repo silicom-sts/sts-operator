@@ -28,7 +28,7 @@ import (
 
 	"github.com/Masterminds/sprig"
 	"github.com/go-logr/logr"
-	stsv1alpha1 "github.com/rmr/sts-operator/api/v1alpha1"
+	stsv1alpha1 "github.com/silicom-sts/sts-operator/api/v1alpha1"
 	appsv1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/equality"
