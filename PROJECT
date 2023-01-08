@@ -23,7 +23,7 @@ resources:
   domain: silicom.com
   group: sts
   kind: StsNode
-  path: github.com/rmr/sts-operator/api/v1alpha1
+  path: github.com/silicom-sts/sts-operator/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
