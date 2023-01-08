@@ -35,7 +35,7 @@ import (
 	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
 	helmerv1beta1 "github.com/openshift-psap/special-resource-operator/pkg/helmer/api/v1beta1"
 	nfdv1 "github.com/openshift/cluster-nfd-operator/api/v1"
-	stsv1alpha1 "github.com/rmr/sts-operator/api/v1alpha1"
+	stsv1alpha1 "github.com/silicom-sts/sts-operator/api/v1alpha1"
 )
 
 // StsOperatorConfigReconciler reconciles a StsOperatorConfig object
