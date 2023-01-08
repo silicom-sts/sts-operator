@@ -7,13 +7,61 @@ spec:
   nodeSelector:
     sts.silicom.com/mode: "gm-1"
   mode: T-GM.8275.1
+    twoStep: 0 
+  esmcMode: 2
+  ssmMode: 1
+  forwardable: 1
+  synceRecClkPort: 3
+  syncOption: 1
+  gnssSpec:
+    gnssSigGpsEn: 1
   interfaces:
-    - ethName: enp2s0f0
-      synce: 1
+    - ethName: ens4f0
       holdoff: 500
+      synce: 1
       mode: Master
       ethPort: 1
-      ql: 4
       qlEnable: 1
-      ipv4: 1
-      ipv6: 1
+    - ethName: ens4f1
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 2
+      qlEnable: 1
+    - ethName: ens4f2
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 3
+      qlEnable: 1
+    - ethName: ens4f3
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 4
+      qlEnable: 1
+    - ethName: ens4f4
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 5
+      qlEnable: 1
+    - ethName: ens4f5
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 6
+      qlEnable: 1
+    - ethName: ens4f6
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 7
+      qlEnable: 1
+    - ethName: ens4f7
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 8
+      qlEnable: 1
+
