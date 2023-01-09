@@ -83,9 +83,12 @@ metadata:
           "apiVersion": "sts.silicom.com/v1alpha1",
           "kind": "StsNode",
           "metadata": {
-            "name": "worker2"
+            "name": "hp-ocp",
+            "namespase": "openshift-operators"
           },
-          "spec": {},
+          "spec": {
+            "dummy": 0
+          },
           "status": {
             "ethInterfaces": [
               {
@@ -592,19 +595,19 @@ spec:
   - silicom-sts-operator.v0.0.9
   version: 0.1.3
   relatedImages:
-  - image: quay.io/silicom/gpsd@sha256:cc1066f0ab347fd11c2214d6633b9727f581830bcc6b638df51e5657a5408c07
+  - image: quay.io/silicom/gpsd@sha256:e479c542e061b5422865f2617ed0563794f265c6e6660e5a9d204c9e1cb2f346
     name: gpsd
-  - image: quay.io/silicom/phc2sys@sha256:f471a2596c2cff1c538a7f167c3c586721f36dd9690cf656e329f797fd16f412
+  - image: quay.io/silicom/phc2sys@sha256:b067167a1a5d93e9fe715c7774f6cdbbcd93cac27780f022e44dcb8a4d4d7bb9
     name: phc2sys
-  - image: quay.io/silicom/tsyncd@sha256:410d078fdf94a306942d36c69d86af35afd51711b2dad67a7d6ced7f5b52c8d3
+  - image: quay.io/silicom/tsyncd@sha256:3f1cbd4a8b5d62d7d3e525af5f26d9f27b8c08e886b0639a1e368163e166b537
     name: tsyncd
-  - image: quay.io/silicom/grpc-tsyncd@sha256:7ddf9e3ba749f6ec8ded7c4a2d41d94008eb64f69e38f14a01e082f780b08994
+  - image: quay.io/silicom/grpc-tsyncd@sha256:631bb754742e1a24376913baed60e480a6e6ae988ad9a3892254ff96996c15d1
     name: grpc-tsyncd
-  - image: quay.io/silicom/sts-plugin@sha256:4c1ad0e4d7219f91b9e62425fa92cc034b1f5a8991e277d003aefec39544089d
+  - image: quay.io/silicom/sts-plugin@sha256:233bc95f8617a06bd452548ec116d91551dd4933970860d8d5ccb81f75ad2220
     name: sts-plugin
-  - image: quay.io/silicom/ice-driver-src@sha256:56fbe39ec7b1732959f1bdef7854376e3b8f6aa7a1ebd2dcdd84c738a2eb7604
+  - image: quay.io/silicom/ice-driver-src@sha256:569c8333e21c7c022ea71fa5b418404899040d5b3a3a4128eeac21f62aacaf3e
     name: ice-driver-src
-  - image: quay.io/silicom/sts-operator@sha256:05752b6e2fe070ef0fda15a64c58aad0fadeaf0ef1380b13a5bffc41b87c3cda
+  - image: quay.io/silicom/sts-operator@sha256:7d474d0aa91ac57d8f5817b033b67b511c8601e0dbd83d808a69004bd24b4e60
     name: sts-operator
   - image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
     name: kube-rbac-proxy

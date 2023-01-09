@@ -9,8 +9,8 @@ OPERATOR_VER := $(shell git branch --show-current)
 
 EXTRA_SERVICE_ACCOUNTS := --extra-service-accounts="sts-plugin,sts-tsync"
 
-TSYNC_VERSION := 2.1.2.9
-ICE_VERSION = 1.8.8
+TSYNC_VERSION := 2.1.2.14
+ICE_VERSION = 1.8.3.1.2
 
 MARKETPLACE_REMOTE_WORKFLOW  := https://marketplace.redhat.com/en-us/operators/silicom-sts-operator/pricing?utm_source=openshift_console
 MARKETPLACE_SUPPORT_WORKFLOW := https://marketplace.redhat.com/en-us/operators/silicom-sts-operator/support?utm_source=openshift_console
@@ -386,9 +386,9 @@ opp:
 	chmod +x bin/opp.sh
 
 opp-community-test: community-bundle
-	cd $(COMMUNITY_OPERATORS_DIR)
+	cd $(COMMUNITY_PROD_OPERATORS_DIR)
 	OPP_PRODUCTION_TYPE=ocp OPP_AUTO_PACKAGEMANIFEST_CLUSTER_VERSION_LABEL=1 \
-		$(OPP) all $(COMMUNITY_OPERATORS_DIR)/operators/$(OPERATOR_NAME)/$(OPERATOR_VER)
+		$(OPP) all $(COMMUNITY_PROD_OPERATORS_DIR)/operators/$(OPERATOR_NAME)/$(OPERATOR_VER)
 
 update-images:
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/gpsd:3.23.1)"
