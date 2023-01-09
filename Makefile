@@ -68,12 +68,12 @@ CRD_OPTIONS ?= "crd:trivialVersions=true,preserveUnknownFields=false"
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.21
 
-COMMUNITY_PROD_OPERATORS_GIT := https://github.com/rmr/community-operators-prod.git
+COMMUNITY_PROD_OPERATORS_GIT := https://github.com/silicom-sts/community-operators-prod.git
 COMMUNITY_PROD_OPERATORS_DIR := community-operators-prod
 OPERATOR_NAME			:= silicom-sts-operator
 
 CERTIFIED_DIR         := certified-operators
-CERTIFIED_GIT         := https://github.com/rmr/certified-operators.git
+CERTIFIED_GIT         := https://github.com/silicom-sts/certified-operators.git
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
