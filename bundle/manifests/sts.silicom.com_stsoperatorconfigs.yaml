@@ -36,22 +36,22 @@ spec:
             properties:
               images:
                 default:
-                  tsyncd: quay.io/silicom/tsyncd:2.1.2.14
+                  tsyncd: quay.io/silicom/tsyncd:2.1.2.15
                 properties:
                   gpsd:
                     default: quay.io/silicom/gpsd:3.23.1
                     type: string
                   grpcTsyncd:
-                    default: quay.io/silicom/grpc-tsyncd:2.1.2.14
+                    default: quay.io/silicom/grpc-tsyncd:2.1.2.15
                     type: string
                   phc2sys:
-                    default: quay.io/silicom/phc2sys:3.1.1
+                    default: quay.io/silicom/phc2sys:3.1-00193-g6bac465
                     type: string
                   stsPlugin:
-                    default: quay.io/silicom/sts-plugin:0.1.3
+                    default: quay.io/silicom/sts-plugin:0.1.4
                     type: string
                   tsyncd:
-                    default: quay.io/silicom/tsyncd:2.1.2.14
+                    default: quay.io/silicom/tsyncd:2.1.2.15
                     type: string
                 type: object
               sro:

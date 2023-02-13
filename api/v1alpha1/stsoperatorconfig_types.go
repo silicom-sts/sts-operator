@@ -28,7 +28,7 @@ import (
 type StsOperatorConfigSpec struct {
 
 	// +kubebuilder:validation:Required
-	// +kubebuilder:default={"tsyncd":"quay.io/silicom/tsyncd:2.1.2.14"}
+	// +kubebuilder:default={"tsyncd":"quay.io/silicom/tsyncd:2.1.2.15"}
 	Images StsImages `json:"images,omitempty"`
 
 	// +kubebuilder:validation:Required
@@ -67,15 +67,15 @@ type SroCfg struct {
 
 type StsImages struct {
 
-	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.14"
+	// +kubebuilder:default:string="quay.io/silicom/tsyncd:2.1.2.15"
 	// +kubebuilder:validation:Required
 	Tsyncd string `json:"tsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.14"
+	// +kubebuilder:default:string="quay.io/silicom/grpc-tsyncd:2.1.2.15"
 	// +kubebuilder:validation:Required
 	GrpcTsyncd string `json:"grpcTsyncd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.1.3"
+	// +kubebuilder:default:string="quay.io/silicom/sts-plugin:0.1.4"
 	// +kubebuilder:validation:Required
 	StsPlugin string `json:"stsPlugin,omitempty"`
 
@@ -83,7 +83,7 @@ type StsImages struct {
 	// +kubebuilder:validation:Required
 	Gpsd string `json:"gpsd,omitempty"`
 
-	// +kubebuilder:default:string="quay.io/silicom/phc2sys:3.1.1"
+	// +kubebuilder:default:string="quay.io/silicom/phc2sys:3.1-00193-g6bac465"
 	// +kubebuilder:validation:Required
 	Phc2sys string `json:"phc2sys,omitempty"`
 }

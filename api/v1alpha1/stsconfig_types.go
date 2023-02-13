@@ -842,9 +842,9 @@ type StsConfigSpec struct {
 	// +kubebuilder:validation:Required
 	SyncOption int `json:"syncOption,omitempty"`
 
-	// +kubebuilder:default:=4
-	// +kubebuilder:validation:Minimum=0
-	// +kubebuilder:validation:Maximum=10
+	// +kubebuilder:default:=-1
+	// +kubebuilder:validation:Minimum=-1
+	// +kubebuilder:validation:Maximum=99
 	// Set CPU Pin for SyncE ESMC thread (cpu affinity on each node)
 	// +kubebuilder:validation:Required
 	StsCpu int `json:"stsCpu,omitempty"`

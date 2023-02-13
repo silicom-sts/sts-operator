@@ -9,7 +9,7 @@ OPERATOR_VER := $(shell git branch --show-current)
 
 EXTRA_SERVICE_ACCOUNTS := --extra-service-accounts="sts-plugin,sts-tsync"
 
-TSYNC_VERSION := 2.1.2.14
+TSYNC_VERSION := 2.1.2.15
 ICE_VERSION = 1.8.3.1.2
 
 MARKETPLACE_REMOTE_WORKFLOW  := https://marketplace.redhat.com/en-us/operators/silicom-sts-operator/pricing?utm_source=openshift_console
@@ -378,7 +378,6 @@ certified-bundle: bundle
 	@echo "cert_project_id: 6266943761336b5931b9632c" > $(CERTIFIED_DIR)/operators/$(OPERATOR_NAME)/ci.yaml
 	sed -i 's/sts-operator:$(OPERATOR_VER)/sts-operator@$(shell $(YQ) '.relatedImages.[] | select(.name == "sts-operator") | .image ' images.yaml | cut -d '@' -f 2)/' \
 			 $(CERTIFIED_DIR)/operators/$(OPERATOR_NAME)/$(OPERATOR_VER)/manifests/silicom-sts-operator.clusterserviceversion.yaml
-	sed -i '/replaces:/d' $(CERTIFIED_DIR)/operators/$(OPERATOR_NAME)/$(OPERATOR_VER)/manifests/silicom-sts-operator.clusterserviceversion.yaml
 
 OPP = bin/opp.sh
 opp:
@@ -395,14 +394,14 @@ update-images:
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/sts-plugin:$(OPERATOR_VER))"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/tsyncd:$(TSYNC_VERSION) )"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/grpc-tsyncd:$(TSYNC_VERSION))"
-	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/phc2sys:3.1.1)"
+	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/phc2sys:3.1-00193-g6bac465)"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/ice-driver-src:$(ICE_VERSION))"
 	@echo "$(shell docker pull -q $(IMAGE_REGISTRY)/sts-operator:$(OPERATOR_VER))"
 	@echo "$(shell docker pull -q gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0)"
 	@echo "  relatedImages:" > images.yaml
 	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/gpsd:3.23.1 --format '{{ index .RepoDigests 0 }}')" >> images.yaml
 	@echo "    name: gpsd" >> images.yaml
-	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/phc2sys:3.1.1 --format '{{ index .RepoDigests 0 }}')" >> images.yaml
+	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/phc2sys:3.1-00193-g6bac465 --format '{{ index .RepoDigests 0 }}')" >> images.yaml
 	@echo "    name: phc2sys" >> images.yaml
 	@echo "  - image: $(shell docker inspect $(IMAGE_REGISTRY)/tsyncd:$(TSYNC_VERSION)  --format '{{ index .RepoDigests 0 }}')" >> images.yaml
 	@echo "    name: tsyncd" >> images.yaml

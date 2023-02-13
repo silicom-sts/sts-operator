@@ -56,9 +56,6 @@ data:
     inbandMode = 1 
     dumpMode = 0
     getRawTs = 0
-    countDelay = 0
-    dataDelay = 0
-    statDelay = 0
     aprLevel = {{.StsConfig.Spec.AprLevel}}
     traceModule = {{.StsConfig.Spec.TraceModule}}
     traceLevel = {{.StsConfig.Spec.TraceLevel}}

@@ -594,11 +594,11 @@ spec:
                 minimum: 1
                 type: integer
               stsCpu:
-                default: 4
+                default: -1
                 description: Set CPU Pin for SyncE ESMC thread (cpu affinity on each
                   node)
-                maximum: 10
-                minimum: 0
+                maximum: 99
+                minimum: -1
                 type: integer
               syncOption:
                 default: 1
